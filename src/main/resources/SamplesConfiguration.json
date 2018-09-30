@@ -1,0 +1,54 @@
+{
+  "PartnerServiceSettings": {
+    "PartnerServiceApiEndpoint": "https://api.partnercenter.microsoft.com",
+    "AuthenticationAuthorityEndpoint": "https://login.windows.net/",
+    "GraphEndpoint": "https://graph.windows.net",
+    "CommonDomain": "common"
+  },
+  "UserAuthentication": {
+    "ClientId": "<Enter your ClientId here>",
+    "ResourceUrl": "https://api.partnercenter.microsoft.com",
+    "RedirectUrl": "https://localhost",
+    "UserName": "<Enter your username here>",
+    "Password": "<Enter your password here>"
+  },
+  "AppAuthentication": {
+    "ApplicationId": "<Enter your app-id here>",
+    "ApplicationSecret": "<Enter your app-secret here>",
+    "Domain": "<Enter your domain GUID here>"
+  },
+  "ScenarioSettings": {
+    "CustomerDomainSuffix": "onmicrosoft.com",
+    "CustomerIdToDelete": "",
+    "DefaultAgreementTemplateId": "",
+    "DefaultAvailabilityId": "",
+    "DefaultAzureSubscriptionId": "",
+    "DefaultBatchUploadStatusTrackingId": "",
+    "DefaultBillingCycle": "",
+    "DefaultCatalogItemId": "",
+    "DefaultCartId": "",
+    "DefaultConfigurationPolicyId": "",
+    "DefaultCustomerId": "",
+    "DefaultCustomerIdForUsage": "",
+    "DefaultCustomerUserId": "",
+    "DefaultDeviceId": "",
+    "DefaultDeviceBatchId": "",
+    "DefaultDirectoryRoleId": "",
+    "DefaultOrderId": "",
+    "DefaultProductId": "",
+    "DefaultQuantity": "",
+    "DefaultScope": "",
+    "DefaultSkuId": "",
+    "CustomerPageSize": "100",
+    "InvoicePageSize": "100",
+    "DefaultInvoiceId": "",
+    "PartnerMpnId": "",
+    "DefaultServiceRequestId": "",
+    "ServiceRequestPageSize": "100",
+    "DefaultSupportTopicId": "",
+    "DefaultOfferPageSize": "20",
+    "DefaultOfferId": "",
+    "DefaultSubscriptionId": "",
+    "DefaultSubscriptionIdForUsage": ""
+  }
+}
