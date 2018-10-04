@@ -32,5 +32,4 @@ public interface IPartnerScenario
      * Runs the scenario.
      */
     void run();
-
 }

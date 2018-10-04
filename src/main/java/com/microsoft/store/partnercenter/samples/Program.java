@@ -13,30 +13,30 @@ import com.microsoft.store.partnercenter.models.customers.CustomerSearchField;
 import com.microsoft.store.partnercenter.samples.agreements.CreateCustomerAgreement;
 import com.microsoft.store.partnercenter.samples.agreements.GetAgreementDetails;
 import com.microsoft.store.partnercenter.samples.agreements.GetCustomerAgreements;
-import com.microsoft.store.partnercenter.samples.analytics.GetPartnerLicensesDeploymentAnalytics;
-import com.microsoft.store.partnercenter.samples.analytics.GetPartnerLicensesUsageAnalytics;
 import com.microsoft.store.partnercenter.samples.analytics.GetCustomerLicensesDeploymentAnalytics;
 import com.microsoft.store.partnercenter.samples.analytics.GetCustomerLicensesUsageAnalytics;
+import com.microsoft.store.partnercenter.samples.analytics.GetPartnerLicensesDeploymentAnalytics;
+import com.microsoft.store.partnercenter.samples.analytics.GetPartnerLicensesUsageAnalytics;
 import com.microsoft.store.partnercenter.samples.auditrecords.GetAuditRecords;
 import com.microsoft.store.partnercenter.samples.auditrecords.SearchAuditRecords;
+import com.microsoft.store.partnercenter.samples.carts.CheckoutCart;
 import com.microsoft.store.partnercenter.samples.carts.CreateCart;
 import com.microsoft.store.partnercenter.samples.carts.UpdateCart;
-import com.microsoft.store.partnercenter.samples.carts.CheckoutCart;
 import com.microsoft.store.partnercenter.samples.context.ScenarioContext;
 import com.microsoft.store.partnercenter.samples.customerdirectoryroles.AddUserMemberToDirectoryRole;
 import com.microsoft.store.partnercenter.samples.customerdirectoryroles.GetCustomerDirectoryRoleUserMembers;
 import com.microsoft.store.partnercenter.samples.customerdirectoryroles.GetCustomerDirectoryRoles;
 import com.microsoft.store.partnercenter.samples.customerdirectoryroles.RemoveCustomerUserMemberFromDirectoryRole;
-import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerProducts;
-import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerProductsByTargetSegment;
-import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerProduct;
-import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkus;
-import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkusByTargetSegment;
-import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSku;
-import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkuDownloadOptions;
 import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerAvailabilities;
 import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerAvailabilitiesByTargetSegment;
 import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerAvailability;
+import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerProduct;
+import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerProducts;
+import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerProductsByTargetSegment;
+import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSku;
+import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkuDownloadOptions;
+import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkus;
+import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkusByTargetSegment;
 import com.microsoft.store.partnercenter.samples.customers.CheckDomainAvailability;
 import com.microsoft.store.partnercenter.samples.customers.CreateCustomer;
 import com.microsoft.store.partnercenter.samples.customers.DeleteCustomerFromTipAccount;
@@ -53,32 +53,32 @@ import com.microsoft.store.partnercenter.samples.customerservicecosts.GetCustome
 import com.microsoft.store.partnercenter.samples.customerservicecosts.GetCustomerServiceCostsSummary;
 import com.microsoft.store.partnercenter.samples.customersubscribedskus.CustomerSubscribedSkus;
 import com.microsoft.store.partnercenter.samples.customerusers.CreateCustomerUser;
-import com.microsoft.store.partnercenter.samples.customerusers.DeleteCustomerUser;
-import com.microsoft.store.partnercenter.samples.customerusers.GetCustomerUserDetails;
-import com.microsoft.store.partnercenter.samples.customerusers.UpdateCustomerUser;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.CreateConfigurationPolicy;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.GetAllConfigurationPolicies;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.UpdateConfigurationPolicy;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.DeleteConfigurationPolicy;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.CreateDeviceBatch;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.GetDevicesBatches;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.CreateDevices;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.GetDevices;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.UpdateDevicesPolicy;
-import com.microsoft.store.partnercenter.samples.entitlements.GetEntitlements;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.DeleteDevice;
-import com.microsoft.store.partnercenter.samples.devicesdeployment.GetBatchUploadStatus;
-import com.microsoft.store.partnercenter.samples.customerusers.GetPagedCustomerUsers;
-import com.microsoft.store.partnercenter.samples.customerusers.GetCustomerUserDirectoryRoles;
-import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignedLicenses;
+import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignGroup1Licenses;
+import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignGroup2Licenses;
+import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignLicenses;
 import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignedGroup1AndGroup2Licenses;
 import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignedGroup1Licenses;
 import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignedGroup2Licenses;
-import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignLicenses;
-import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignGroup1Licenses;
-import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignGroup2Licenses;
-import com.microsoft.store.partnercenter.samples.customerusers.GetCustomerInactiveUsers;
+import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserAssignedLicenses;
 import com.microsoft.store.partnercenter.samples.customerusers.CustomerUserRestore;
+import com.microsoft.store.partnercenter.samples.customerusers.DeleteCustomerUser;
+import com.microsoft.store.partnercenter.samples.customerusers.GetCustomerInactiveUsers;
+import com.microsoft.store.partnercenter.samples.customerusers.GetCustomerUserDetails;
+import com.microsoft.store.partnercenter.samples.customerusers.GetCustomerUserDirectoryRoles;
+import com.microsoft.store.partnercenter.samples.customerusers.GetPagedCustomerUsers;
+import com.microsoft.store.partnercenter.samples.customerusers.UpdateCustomerUser;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.CreateConfigurationPolicy;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.CreateDeviceBatch;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.CreateDevices;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.DeleteConfigurationPolicy;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.DeleteDevice;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.GetAllConfigurationPolicies;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.GetBatchUploadStatus;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.GetDevices;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.GetDevicesBatches;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.UpdateConfigurationPolicy;
+import com.microsoft.store.partnercenter.samples.devicesdeployment.UpdateDevicesPolicy;
+import com.microsoft.store.partnercenter.samples.entitlements.GetEntitlements;
 import com.microsoft.store.partnercenter.samples.indirectmodel.CreateCustomerForIndirectReseller;
 import com.microsoft.store.partnercenter.samples.indirectmodel.GetCustomersOfIndirectReseller;
 import com.microsoft.store.partnercenter.samples.indirectmodel.GetIndirectResellers;
@@ -126,8 +126,8 @@ import com.microsoft.store.partnercenter.samples.ratecards.GetAzureRateCard;
 import com.microsoft.store.partnercenter.samples.ratecards.GetAzureSharedRateCard;
 import com.microsoft.store.partnercenter.samples.ratedusage.GetCustomerSubscriptionsUsage;
 import com.microsoft.store.partnercenter.samples.ratedusage.GetCustomerUsageSummary;
-import com.microsoft.store.partnercenter.samples.ratedusage.GetSubscriptionUsageRecords;
 import com.microsoft.store.partnercenter.samples.ratedusage.GetSubscriptionResourceUsage;
+import com.microsoft.store.partnercenter.samples.ratedusage.GetSubscriptionUsageRecords;
 import com.microsoft.store.partnercenter.samples.ratedusage.GetSubscriptionUsageSummary;
 import com.microsoft.store.partnercenter.samples.serviceincidents.GetServiceIncidents;
 import com.microsoft.store.partnercenter.samples.servicerequests.CreatePartnerServiceRequest;
@@ -160,31 +160,31 @@ public class Program
         ScenarioContext context = new ScenarioContext();
         List<IPartnerScenario> mainScenarios = new ArrayList<IPartnerScenario>();
 
-        mainScenarios.add( Program.getCustomerScenarios(context));
-        mainScenarios.add( Program.getAgreementsScenarios(context));
-        mainScenarios.add( Program.getOfferScenarios(context));
-        mainScenarios.add( Program.getProductScenarios(context));
-        mainScenarios.add( Program.getCustomerProductsScenarios(context));
-        mainScenarios.add( Program.getOrderScenarios(context));
-        mainScenarios.add( Program.getSubscriptionScenarios(context));
-        mainScenarios.add( Program.getRatedUsageScenarios(context));
-        mainScenarios.add( Program.getServiceRequestScenarios(context));
-        mainScenarios.add( Program.getInvoiceScenarios(context));
-        mainScenarios.add( Program.getProfileScenarios(context));
-        mainScenarios.add( Program.getCustomerUserScenarios(context));
-        mainScenarios.add( Program.getCustomerSubscribedSkusScenarios(context));
-        mainScenarios.add( Program.getCustomerDirectoryRoleScenarios(context));
-        mainScenarios.add( Program.getAuditRecordScenarios(context));
-        mainScenarios.add( Program.getRateCardScenarios(context));
-        mainScenarios.add( Program.getIndirectModelScenarios(context));
-        mainScenarios.add( Program.getServiceIncidentScenarios(context));
-        mainScenarios.add ( Program.getUtilizationScenarios(context));
-        mainScenarios.add( Program.getPartnerAnalyticsScenarios(context));
-        mainScenarios.add( Program.getCustomerServiceCostsScenarios(context));
+        mainScenarios.add(Program.getCustomerScenarios(context));
+        mainScenarios.add(Program.getAgreementsScenarios(context));
+        mainScenarios.add(Program.getOfferScenarios(context));
+        mainScenarios.add(Program.getProductScenarios(context));
+        mainScenarios.add(Program.getCustomerProductsScenarios(context));
+        mainScenarios.add(Program.getOrderScenarios(context));
+        mainScenarios.add(Program.getSubscriptionScenarios(context));
+        mainScenarios.add(Program.getRatedUsageScenarios(context));
+        mainScenarios.add(Program.getServiceRequestScenarios(context));
+        mainScenarios.add(Program.getInvoiceScenarios(context));
+        mainScenarios.add(Program.getProfileScenarios(context));
+        mainScenarios.add(Program.getCustomerUserScenarios(context));
+        mainScenarios.add(Program.getCustomerSubscribedSkusScenarios(context));
+        mainScenarios.add(Program.getCustomerDirectoryRoleScenarios(context));
+        mainScenarios.add(Program.getAuditRecordScenarios(context));
+        mainScenarios.add(Program.getRateCardScenarios(context));
+        mainScenarios.add(Program.getIndirectModelScenarios(context));
+        mainScenarios.add(Program.getServiceIncidentScenarios(context));
+        mainScenarios.add(Program.getUtilizationScenarios(context));
+        mainScenarios.add(Program.getPartnerAnalyticsScenarios(context));
+        mainScenarios.add(Program.getCustomerServiceCostsScenarios(context));
         mainScenarios.add(Program.getAddressValidationsScenarios(context));
-        mainScenarios.add( Program.getDevicesScenarios(context));
-        mainScenarios.add( Program.getCartScenarios(context));
-        mainScenarios.add( Program.getEntitlementScenarios(context));
+        mainScenarios.add(Program.getDevicesScenarios(context));
+        mainScenarios.add(Program.getCartScenarios(context));
+        mainScenarios.add(Program.getEntitlementScenarios(context));
 
         // run the main scenario
         new AggregatePartnerScenario( "Partner SDK samples", mainScenarios, context ).run();
@@ -221,6 +221,7 @@ public class Program
         customerScenarios.add( new GetCustomerRelationshipRequest( context ) );
         customerScenarios.add( new UpdateCustomerBillingProfile( context ) );
         customerScenarios.add( new ValidateCustomerAddress( context ) );
+
         return new AggregatePartnerScenario( "Customer samples", customerScenarios, context );
     }
 
@@ -271,12 +272,14 @@ public class Program
     private static IPartnerScenario getSubscriptionScenarios( IScenarioContext context )
     {
         List<IPartnerScenario> subscriptionScenarios = new ArrayList<IPartnerScenario>();
+
         subscriptionScenarios.add( new GetSubscription( context ) );
         subscriptionScenarios.add( new GetSubscriptions( context ) );
         subscriptionScenarios.add( new GetSubscriptionsByOrder( context ) );
         subscriptionScenarios.add( new UpdateSubscription( context ) );
         subscriptionScenarios.add( new UpgradeSubscription( context ) );
         subscriptionScenarios.add( new AddSubscriptionAddOn( context ) );
+
         return new AggregatePartnerScenario( "Subscription samples", subscriptionScenarios, context );
     }
 
@@ -289,11 +292,13 @@ public class Program
     private static IPartnerScenario getRatedUsageScenarios( IScenarioContext context )
     {
         List<IPartnerScenario> ratedUsageScenarios = new ArrayList<IPartnerScenario>();
+
         ratedUsageScenarios.add( new GetCustomerUsageSummary( context ) );
         ratedUsageScenarios.add( new GetCustomerSubscriptionsUsage( context ) );
         ratedUsageScenarios.add( new GetSubscriptionResourceUsage( context ) );
         ratedUsageScenarios.add( new GetSubscriptionUsageRecords( context ) );
         ratedUsageScenarios.add( new GetSubscriptionUsageSummary( context ) );
+
         return new AggregatePartnerScenario( "Rated Usage samples", ratedUsageScenarios, context );
     }
 
@@ -306,6 +311,7 @@ public class Program
     private static IPartnerScenario getServiceRequestScenarios( IScenarioContext context )
     {
         List<IPartnerScenario> serviceRequestScenarios = new ArrayList<IPartnerScenario>();
+
         serviceRequestScenarios.add( new CreatePartnerServiceRequest( context ) );
         serviceRequestScenarios.add( new GetAllCustomerServiceRequests( context ) );
         serviceRequestScenarios.add( new GetPagedPartnerServiceRequests( context,
@@ -313,6 +319,7 @@ public class Program
         serviceRequestScenarios.add( new GetPartnerServiceRequestDetails( context ) );
         serviceRequestScenarios.add( new GetServiceRequestSupportTopics( context ) );
         serviceRequestScenarios.add( new UpdatePartnerServiceRequest( context ) );
+
         return new AggregatePartnerScenario( "Service request samples", serviceRequestScenarios, context );
     }
 
@@ -349,6 +356,7 @@ public class Program
     private static IPartnerScenario getProfileScenarios( IScenarioContext context )
     {
         List<IPartnerScenario> profileScenarios = new ArrayList<IPartnerScenario>();
+
         profileScenarios.add( new GetBillingProfile( context ) );
         profileScenarios.add( new GetLegalBusinessProfile( context ) );
         profileScenarios.add( new GetOrganizationProfile( context ) );
@@ -358,8 +366,8 @@ public class Program
         profileScenarios.add( new UpdateLegalBusinessProfile( context ) );
         profileScenarios.add( new UpdateOrganizationProfile( context ) );
         profileScenarios.add( new UpdateSupportProfile( context ) );
+
         return new AggregatePartnerScenario( "Partner Profile samples", profileScenarios, context );
-        
     }
 
     /**
@@ -400,7 +408,9 @@ public class Program
     private static IPartnerScenario getCustomerSubscribedSkusScenarios( IScenarioContext context )
     {
         List<IPartnerScenario> customerSubscribedSkusScenarios = new ArrayList<IPartnerScenario>();
+
         customerSubscribedSkusScenarios.add( new CustomerSubscribedSkus( context ) );
+        
         return new AggregatePartnerScenario( "Customer Subscribed Skus samples", customerSubscribedSkusScenarios, context );
     }
 
@@ -413,6 +423,7 @@ public class Program
     private static IPartnerScenario getCustomerDirectoryRoleScenarios( IScenarioContext context )
     {
         List<IPartnerScenario> customerDirectoryRoleScenarios = new ArrayList<IPartnerScenario>();
+
         customerDirectoryRoleScenarios.add( new GetCustomerDirectoryRoles( context ) );
         customerDirectoryRoleScenarios.add( new AddUserMemberToDirectoryRole( context ) );
         customerDirectoryRoleScenarios.add( new GetCustomerDirectoryRoleUserMembers( context ) );
@@ -483,7 +494,9 @@ public class Program
     private static IPartnerScenario getServiceIncidentScenarios( IScenarioContext context )
     {
         List<IPartnerScenario> serviceIncidentScenarios = new ArrayList<IPartnerScenario>();
+
         serviceIncidentScenarios.add( new GetServiceIncidents( context ) );
+        
         return new AggregatePartnerScenario( "Service Incident samples", serviceIncidentScenarios, context );   
     }
 
