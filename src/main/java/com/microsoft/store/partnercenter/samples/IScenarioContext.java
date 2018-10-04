@@ -34,5 +34,4 @@ public interface IScenarioContext
      * Gets a console helper instance.
      */
     ConsoleHelper getConsoleHelper();
-
 }

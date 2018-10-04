@@ -41,5 +41,4 @@ public class AggregatePartnerScenario
             System.out.println( MessageFormat.format( "{0}: {1}", i + 1, this.getChildren().get( i ).getTitle() ) );
         }
     }
-
 }

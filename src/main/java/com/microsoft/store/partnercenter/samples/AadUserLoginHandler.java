@@ -14,18 +14,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.joda.time.DateTime;
-
 import com.microsoft.aad.adal4j.AuthenticationContext;
 import com.microsoft.aad.adal4j.AuthenticationResult;
 import com.microsoft.store.partnercenter.AuthenticationToken;
 import com.microsoft.store.partnercenter.IAadLoginHandler;
 import com.microsoft.store.partnercenter.samples.configuration.ConfigurationHolder;
 
+import org.joda.time.DateTime;
+
 public class AadUserLoginHandler
     implements IAadLoginHandler
 {
-
     /**
      * Logs into Azure active directory.
      * 
@@ -34,7 +33,6 @@ public class AadUserLoginHandler
     @Override
     public AuthenticationToken authenticate()
     {
-        // async
         // read AAD configuration
         String authority =
             ConfigurationHolder.getInstance().getConfiguration().getPartnerServiceSettings().get( "AuthenticationAuthorityEndpoint" );
@@ -87,8 +85,7 @@ public class AadUserLoginHandler
         {
             throw new NullPointerException( "authentication result was null" );
         }
+
         return new AuthenticationToken( result.getAccessToken(), new DateTime( result.getExpiresOnDate() ) );
-
     }
-
 }
