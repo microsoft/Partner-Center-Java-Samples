@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.microsoft.store</groupId>
 	<artifactId>partnercenter-samples</artifactId>
-	<version>1.8.0</version>
+	<version>1.8.1</version>
 	<packaging>jar</packaging>
 	<name>Samples</name>
 	<url>http://maven.apache.org</url>
@@ -12,40 +12,9 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>com.microsoft.azure</groupId>
-			<artifactId>adal4j</artifactId>
-			<version>1.6.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.9.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>2.9.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.9.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-joda</artifactId>
-			<version>2.9.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.6</version>
-		</dependency>
-		<dependency>
 			<groupId>com.microsoft.store</groupId>
 			<artifactId>partnercenter</artifactId>
-			<version>1.8.0</version>
+			<version>1.8.1</version>
 		</dependency>
 	</dependencies>
 	<build>

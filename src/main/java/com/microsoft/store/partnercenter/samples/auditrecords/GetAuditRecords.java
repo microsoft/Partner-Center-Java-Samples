@@ -33,11 +33,13 @@ public class GetAuditRecords extends BasePartnerScenario
 		IAggregatePartner partnerOperations = this.getContext().getUserPartnerOperations();
         this.getContext().getConsoleHelper().startProgress( "Querying audit records" );
         
-        DateTime startDate = DateTime.now().minusDays(1);
+        DateTime startDate = DateTime.now().minusDays(30);
+
         // query the audit records, get the first page if a page size was set, otherwise get all customers
         SeekBasedResourceCollection<AuditRecord> auditRecordsCollection = 
         		partnerOperations.getAuditRecords().query(startDate, null, QueryFactory.getInstance().buildIndexedQuery( 10 ) );
         this.getContext().getConsoleHelper().stopProgress();
+
         // create an AuditRecord enumerator which will aid us in traversing the customer pages
         IResourceCollectionEnumerator<SeekBasedResourceCollection<AuditRecord>> auditRecordssEnumerator =
             partnerOperations.getEnumerators().getAuditRecords().create( auditRecordsCollection );

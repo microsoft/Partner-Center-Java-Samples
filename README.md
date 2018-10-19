@@ -2,7 +2,7 @@
 
 ![Build status](https://dev.azure.com/partnercenter/sdk/_apis/build/status/partner-center-java-samples-CI)
 
-This console test app provides sample code for all the scenarios supported by the Partner Center APIs. You can also use it for testing.
+This console test app provides sample code for all the scenarios supported by the [Partner Center Java SDK](https://github.com/Microsoft/Partner-Center-Java). You can also use it for testing.
 
 ## Getting Started
 
@@ -18,22 +18,22 @@ To modify the list of scenarios that are run, comment out lines in **mainScenari
 
 - PartnerServiceApiEndpoint
 - AuthenticationAuthorityEndpoint
-- GraphEndpont 
+- GraphEndpoint
 - CommonDomain
 
 All thees settings are necessary for the sample API calls to properly function.
 
 ### AppAuthentication
 
-The following settings much be udpated, so that each scenario functions as excepted
+The following settings must be modified, so that each scenario functions as excepted
 
 - **ApplicationId**: Your Azure Active Directory application identifier, used for authentication
 - **ApplicationSecret**: The application secret, associated with the specified Azure AD application
-- **Domain**: The Azure Active Directory domain where the Azure AD application was created 
+- **Domain**: The Azure Active Directory domain where the Azure AD application was created
 
 ### UserAuthentication
 
-The following settings must be updated, so that each scenario functions as expceted
+The following settings must be updated, so that each scenario functions as expected
 
 - **ApplicationId**: Your Azure Active Directory application identifier, used for authentication
 - **Username**: Your Azure Active Directory username with **AdminAgent** privileges
