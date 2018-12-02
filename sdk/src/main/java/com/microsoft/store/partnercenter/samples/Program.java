@@ -140,6 +140,7 @@ import com.microsoft.store.partnercenter.samples.subscriptions.AddSubscriptionAd
 import com.microsoft.store.partnercenter.samples.subscriptions.GetSubscription;
 import com.microsoft.store.partnercenter.samples.subscriptions.GetSubscriptions;
 import com.microsoft.store.partnercenter.samples.subscriptions.GetSubscriptionsByOrder;
+import com.microsoft.store.partnercenter.samples.subscriptions.RegisterSubscription;
 import com.microsoft.store.partnercenter.samples.subscriptions.UpdateSubscription;
 import com.microsoft.store.partnercenter.samples.subscriptions.UpgradeSubscription;
 import com.microsoft.store.partnercenter.samples.utilization.GetAzureSubscriptionUtilization;
@@ -187,7 +188,7 @@ public class Program
         mainScenarios.add(Program.getEntitlementScenarios(context));
 
         // run the main scenario
-        new AggregatePartnerScenario( "Partner SDK samples", mainScenarios, context ).run();
+        new AggregatePartnerScenario( "Partner Center Java SDK samples", mainScenarios, context ).run();
     }
 
     /**
@@ -199,10 +200,13 @@ public class Program
     private static IPartnerScenario getCustomerScenarios( IScenarioContext context )
     {
         List<IPartnerScenario> customerFilteringScenarios = new ArrayList<IPartnerScenario>();
-        customerFilteringScenarios.add( new FilterCustomers( "Filter by company name", CustomerSearchField.COMPANY_NAME,
-                                                             context ) );
-        customerFilteringScenarios.add( new FilterCustomers( "Filter by domain name", CustomerSearchField.DOMAIN_NAME,
-                                                             context ) );
+        customerFilteringScenarios.add( new FilterCustomers( 
+            "Filter by company name", CustomerSearchField.COMPANY_NAME,
+            context ) );
+        customerFilteringScenarios.add( 
+            new FilterCustomers( "Filter by domain name", CustomerSearchField.DOMAIN_NAME,
+            context ) );
+        
         List<IPartnerScenario> customerScenarios = new ArrayList<IPartnerScenario>();
 
         customerScenarios.add( new CreateCustomer( context ) );
@@ -273,12 +277,13 @@ public class Program
     {
         List<IPartnerScenario> subscriptionScenarios = new ArrayList<IPartnerScenario>();
 
-        subscriptionScenarios.add( new GetSubscription( context ) );
-        subscriptionScenarios.add( new GetSubscriptions( context ) );
-        subscriptionScenarios.add( new GetSubscriptionsByOrder( context ) );
-        subscriptionScenarios.add( new UpdateSubscription( context ) );
-        subscriptionScenarios.add( new UpgradeSubscription( context ) );
-        subscriptionScenarios.add( new AddSubscriptionAddOn( context ) );
+        subscriptionScenarios.add(new GetSubscription(context));
+        subscriptionScenarios.add(new GetSubscriptions(context));
+        subscriptionScenarios.add(new GetSubscriptionsByOrder(context));
+        subscriptionScenarios.add(new UpdateSubscription(context));
+        subscriptionScenarios.add(new UpgradeSubscription(context));
+        subscriptionScenarios.add(new AddSubscriptionAddOn(context));
+        subscriptionScenarios.add(new RegisterSubscription(context));
 
         return new AggregatePartnerScenario( "Subscription samples", subscriptionScenarios, context );
     }

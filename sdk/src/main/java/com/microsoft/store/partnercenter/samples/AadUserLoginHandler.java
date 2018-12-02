@@ -6,7 +6,7 @@
 
 package com.microsoft.store.partnercenter.samples;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.ExecutionException;
@@ -16,6 +16,7 @@ import java.util.concurrent.Future;
 
 import com.microsoft.aad.adal4j.AuthenticationContext;
 import com.microsoft.aad.adal4j.AuthenticationResult;
+import com.microsoft.aad.adal4j.DeviceCode;
 import com.microsoft.store.partnercenter.AuthenticationToken;
 import com.microsoft.store.partnercenter.IAadLoginHandler;
 import com.microsoft.store.partnercenter.samples.configuration.ConfigurationHolder;
@@ -42,29 +43,34 @@ public class AadUserLoginHandler
             ConfigurationHolder.getInstance().getConfiguration().getUserAuthentication().get( "ResourceUrl" );
         String clientId =
             ConfigurationHolder.getInstance().getConfiguration().getUserAuthentication().get( "ClientId" );
-        String userName =
-            ConfigurationHolder.getInstance().getConfiguration().getUserAuthentication().get( "UserName" );
-        String password =
-            ConfigurationHolder.getInstance().getConfiguration().getUserAuthentication().get( "Password" );
 
         AuthenticationContext context = null;
         AuthenticationResult result = null;
         ExecutorService service = null;
+
         try
         {
             URI addAuthority = new URI( authority ).resolve( new URI( commonDomain ) );
 
             service = Executors.newFixedThreadPool( 1 );
             context = new AuthenticationContext( addAuthority.toString(), false, service );
-            Future<AuthenticationResult> future =
-                context.acquireToken( resourceUrl, clientId, userName, password, null );
+         
+            Future<DeviceCode> deviceCodeResult = context.acquireDeviceCode(clientId, resourceUrl, null);
+            DeviceCode deviceCode = deviceCodeResult.get(); 
+
+            System.out.println(deviceCode.getMessage());
+            System.out.println("After you have successfully authenticating press enter to continue...");
+            System.in.read();
+
+            Future<AuthenticationResult> future = context.acquireTokenByDeviceCode(deviceCode, null);
+
             result = future.get();
         }
-        catch ( URISyntaxException e )
+        catch(IOException e)
         {
             e.printStackTrace();
         }
-        catch ( MalformedURLException e )
+        catch ( URISyntaxException e )
         {
             e.printStackTrace();
         }
