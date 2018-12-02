@@ -2,70 +2,15 @@
 
 ![Build status](https://dev.azure.com/partnercenter/sdk/_apis/build/status/partner-center-java-samples-CI)
 
-This console test app provides sample code for all the scenarios supported by the [Partner Center Java SDK](https://github.com/Microsoft/Partner-Center-Java). You can also use it for testing.
+This repository contains samples for the Partner Center .NET SDK.
 
-## Getting Started
+## Samples List
 
-Before you build the application, update the values in the *SamplesConfigurations.json* file to reflect the Azure AD authentication information you created in [Partner Center authentication](https://docs.microsoft.com/partner-center/develop/partner-center-authentication). Specifically, you should use your integration sandbox account settings during early development or for testing in production.
+| Sample Name | Description |
+|-------------|-------------|
+| [SDK Samples](sdk/README.md) | Console application that demonstrates each scenario the Partner Center Java SDK is capable of performing.|
+| [Secure App Model](secure-app-model/README.md) | A set of projects that demonstrate how a Control Panel Vendor (CPV) and a Cloud Solution Provider (CSP) should implement the Secure App Model. |
 
-Under **ScenarioSettings** in the *SamplesConfiguration.json* file, you can set parameters that will be automatically passed into the scenarios that you run.
+## Reporting Security Issues
 
-To modify the list of scenarios that are run, comment out lines in **mainScenarios** or in an individual **Get Scenarios** method found in the *Program.java* file.
-
-## What to Change
-
-### PartnerServiceSettings
-
-- PartnerServiceApiEndpoint
-- AuthenticationAuthorityEndpoint
-- GraphEndpoint
-- CommonDomain
-
-All thees settings are necessary for the sample API calls to properly function.
-
-### AppAuthentication
-
-The following settings must be modified, so that each scenario functions as excepted
-
-- **ApplicationId**: Your Azure Active Directory application identifier, used for authentication
-- **ApplicationSecret**: The application secret, associated with the specified Azure AD application
-- **Domain**: The Azure Active Directory domain where the Azure AD application was created
-
-### UserAuthentication
-
-The following settings must be updated, so that each scenario functions as expected
-
-- **ApplicationId**: Your Azure Active Directory application identifier, used for authentication
-- **Username**: Your Azure Active Directory username with **AdminAgent** privileges
-- **Password**: The password associated with the specified Azure Active Directory user.
-
-Do not change the following configurations
-
-- RedirectUrl
-- ResourceUrl
-
-### ScenarioSettings
-
-Do not change the following setting
-
-- **CustomerDomainSuffix**: The domain suffix used when creating a new customer
-
-The following settings can be updated, if left blank information will need to be inputted when running a scenario where it is necessary
-
-- **CustomerIdToDelete**: The ID of the customer used for deletion.
-- **DefaultCustomerId**: The customer ID to use in customer-related scenarios.
-- **DefaultInvoiceId**: The invoice ID to use in invoice scenarios.
-- **PartnerMpnId**: The partner MPN ID to use in indirect partner scenarios.
-- **DefaultServiceRequestId**: The service request ID to use in service request scenarios.
-- **DefaultSupportTopicId**: The support topic ID to use in service request scenarios.
-- **DefaultOfferId**: The offer ID to use in offer scenarios.
-- **DefaultOrderId**: The order ID to use in order scenarios.
-- **DefaultSubscriptionId**: The subscription ID to use in subscription scenarios.
-
-Each of the following of settings specify the amount of entries per page when retrieving paged content. These settings can be modified if desired
-
-- CustomerPageSize
-- DefaultOfferPageSize
-- InvoicePageSize
-- ServiceRequestPageSize
-- SubscriptionPageSize
+Security issues and bugs should be reported privately, via email, to the Microsoft Security Response Center (MSRC) at [secure@microsoft.com](mailto:secure@microsoft.com). You should receive a response within 24 hours. If for some reason you do not, please follow up via email to ensure we received your original message. Further information, including the [MSRC PGP](https://www.microsoft.com/msrc/pgp-key-msrc) key, can be found in the [Microsoft Security Response Center](https://www.microsoft.com/msrc).
