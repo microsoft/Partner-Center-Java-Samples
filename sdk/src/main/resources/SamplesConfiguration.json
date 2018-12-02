@@ -6,11 +6,9 @@
     "CommonDomain": "common"
   },
   "UserAuthentication": {
-    "ClientId": "<Enter your ClientId here>",
+    "ClientId": "<Enter your app-id> here",
     "ResourceUrl": "https://api.partnercenter.microsoft.com",
-    "RedirectUrl": "https://localhost",
-    "UserName": "<Enter your username here>",
-    "Password": "<Enter your password here>"
+    "RedirectUrl": "https://localhost"
   },
   "AppAuthentication": {
     "ApplicationId": "<Enter your app-id here>",
