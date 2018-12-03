@@ -93,9 +93,11 @@ public class ScenarioContext
             System.out.println( "Authenticating user... " );
             // give the partner SDK the new add token information
             IAadLoginHandler loginHandler = new AadUserLoginHandler();
-            IPartnerCredentials userCredentials =
-                PartnerCredentials.getInstance().generateByUserCredentials( this.getConfiguration().getUserAuthentication().get( "ClientId" ),
-                                                              loginHandler.authenticate(), loginHandler );
+            
+            IPartnerCredentials userCredentials = PartnerCredentials.getInstance().generateByUserCredentials(
+                    this.getConfiguration().getUserAuthentication().get( "ClientId" ),
+                    loginHandler.authenticate(), 
+                    loginHandler );
 
             System.out.println( "Authenticated!" );
             this.userPartnerOperations = PartnerService.getInstance().createPartnerOperations( userCredentials );

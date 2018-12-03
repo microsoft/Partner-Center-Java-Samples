@@ -17,6 +17,7 @@ To qualify as a CPV, you must on board to Microsoft Partner Center as a control 
 
 | Sample Name | Description |
 |-------------|-------------|
+| [CSP Sample](keyvault/cspsample/README.md) | Sample console application that demonstrates how a Cloud Solution Provider (CSP) partner can utilize the refresh token stored using the Partner Consent sample. |
 | [Partner Consent](keyvault/partnerconsent/README.md) | Sample web application developed in Java, that demonstrates how a control panel vendor and Cloud Solution Provider partners can obtain the required consent. This process will store the refresh token for the authenticated user in an instance of Azure Key Vault.|
 
 ## Application identity and concepts
