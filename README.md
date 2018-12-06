@@ -2,7 +2,7 @@
 
 ![Build status](https://dev.azure.com/partnercenter/sdk/_apis/build/status/partner-center-java-samples-CI)
 
-This repository contains samples for the Partner Center .NET SDK.
+This repository contains samples for the Partner Center Java SDK.
 
 ## Samples List
 
