@@ -135,9 +135,9 @@ public abstract class BasePartnerScenario
             {
                 this.runScenario();
             }
-            catch ( Exception exception )
+            catch (Exception ex)
             {
-                this.getContext().getConsoleHelper().error( exception.toString() );
+                this.getContext().getConsoleHelper().error( ex.toString() );
             }
 
             System.out.println();
