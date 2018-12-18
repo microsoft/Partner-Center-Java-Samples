@@ -7,8 +7,7 @@
   },
   "UserAuthentication": {
     "ClientId": "<Enter your app-id> here",
-    "ResourceUrl": "https://api.partnercenter.microsoft.com",
-    "RedirectUrl": "https://localhost"
+    "ResourceUrl": "https://api.partnercenter.microsoft.com"
   },
   "AppAuthentication": {
     "ApplicationId": "<Enter your app-id here>",

@@ -47,9 +47,12 @@ public class GetInvoiceStatement
 
         this.getContext().getConsoleHelper().stopProgress();
         this.getContext().getConsoleHelper().writeObject(invoiceId, "Invoice Id");
+
         try
         {
             this.getContext().getConsoleHelper().writeObject(invoiceStatement.available(), "Invoice Statement Size");
+            
+            invoiceStatement.close();
         } 
         catch (IOException ex)
         {
