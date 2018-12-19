@@ -13,6 +13,13 @@
         },
         {
             "type": "java",
+            "name": "Debug (Launch)-Program<cpvsample>",
+            "request": "launch",
+            "mainClass": "com.microsoft.store.samples.secureappmodel.cpvsample.Program",
+            "projectName": "cpvsample"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch)-Program<cspsample>",
             "request": "launch",
             "mainClass": "com.microsoft.store.samples.secureappmodel.cspsample.Program",
