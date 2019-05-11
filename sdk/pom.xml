@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.microsoft.store</groupId>
 	<artifactId>partnercenter-samples</artifactId>
-	<version>1.10.0</version>
+	<version>1.13.0</version>
 	<packaging>jar</packaging>
 	<name>Samples</name>
 	<url>http://maven.apache.org</url>
@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>com.microsoft.store</groupId>
 			<artifactId>partnercenter</artifactId>
-			<version>1.10.0</version>
+			<version>1.13.0</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -29,8 +29,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -6,7 +6,7 @@
     "CommonDomain": "common"
   },
   "UserAuthentication": {
-    "ClientId": "<Enter your app-id> here",
+    "ClientId": "<Enter your app-id here>",
     "ResourceUrl": "https://api.partnercenter.microsoft.com"
   },
   "AppAuthentication": {

@@ -34,7 +34,6 @@ import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerPro
 import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerProducts;
 import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerProductsByTargetSegment;
 import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSku;
-import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkuDownloadOptions;
 import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkus;
 import com.microsoft.store.partnercenter.samples.customerproducts.GetCustomerSkusByTargetSegment;
 import com.microsoft.store.partnercenter.samples.customers.CheckDomainAvailability;
@@ -110,7 +109,6 @@ import com.microsoft.store.partnercenter.samples.products.GetProduct;
 import com.microsoft.store.partnercenter.samples.products.GetProducts;
 import com.microsoft.store.partnercenter.samples.products.GetProductsByTargetSegment;
 import com.microsoft.store.partnercenter.samples.products.GetSku;
-import com.microsoft.store.partnercenter.samples.products.GetSkuDownloadOptions;
 import com.microsoft.store.partnercenter.samples.products.GetSkus;
 import com.microsoft.store.partnercenter.samples.products.GetSkusByTargetSegment;
 import com.microsoft.store.partnercenter.samples.profiles.GetBillingProfile;
@@ -539,7 +537,6 @@ public class Program
         customerProductsScenarios.add( new GetCustomerSkus( context ) );
         customerProductsScenarios.add( new GetCustomerSkusByTargetSegment( context ) );
         customerProductsScenarios.add( new GetCustomerSku( context ) );
-        customerProductsScenarios.add( new GetCustomerSkuDownloadOptions( context ) );
         customerProductsScenarios.add( new GetCustomerAvailabilities( context ) );
         customerProductsScenarios.add( new GetCustomerAvailabilitiesByTargetSegment( context ) );
         customerProductsScenarios.add( new GetCustomerAvailability( context ) );
@@ -653,7 +650,6 @@ public class Program
         productScenarios.add(new GetProducts(context));
         productScenarios.add(new GetProductsByTargetSegment(context));
         productScenarios.add(new GetSku(context));
-        productScenarios.add(new GetSkuDownloadOptions(context));
         productScenarios.add(new GetSkusByTargetSegment(context));
         productScenarios.add(new GetSkus(context));
 
