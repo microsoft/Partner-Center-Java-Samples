@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Program<partnercenter-samples>",
+            "request": "launch",
+            "mainClass": "com.microsoft.store.partnercenter.samples.Program",
+            "projectName": "partnercenter-samples",
+            "console": "externalTerminal"
+        }
+    ]
+}
