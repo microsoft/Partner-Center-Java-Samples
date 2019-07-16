@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>com.microsoft.store</groupId>
 			<artifactId>partnercenter</artifactId>
-			<version>1.13.4</version>
+			<version>1.13.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
