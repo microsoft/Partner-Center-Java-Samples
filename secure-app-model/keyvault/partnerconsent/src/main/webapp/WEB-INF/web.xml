@@ -6,13 +6,12 @@
 	<display-name>Archetype Created Web Application</display-name>
 	<context-param>
 		<param-name>authority</param-name>
-		<param-value>https://login.microsoftonline.com/</param-value>
+		<param-value>https://login.microsoftonline.com</param-value>
 	</context-param>
 	<context-param>
 		<param-name>tenant</param-name>
 		<param-value>common</param-value>
 	</context-param>
-
 	<filter>
 		<filter-name>AuthenticationFilter</filter-name>
 		<filter-class>com.microsoft.store.samples.partnerconsent.security.AuthenticationFilter</filter-class>
@@ -24,7 +23,6 @@
 			<param-name>client_secret</param-name>
 			<param-value></param-value>
 		</init-param>
-
 		<init-param>
 			<param-name>keyvault_base_url</param-name>
 			<param-value></param-value>
@@ -41,28 +39,28 @@
 			<param-name>keyvault_certifcate_path</param-name>
 			<param-value></param-value>
 		</init-param>
+		<init-param>
+			<param-name>redirect_url</param-name>
+			<param-value></param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern></url-pattern>
 	</servlet-mapping>
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
 	</context-param>
-
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
