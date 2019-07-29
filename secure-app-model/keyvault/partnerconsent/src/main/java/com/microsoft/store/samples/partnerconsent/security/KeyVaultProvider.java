@@ -76,7 +76,7 @@ public class KeyVaultProvider implements IVaultProvider
      * @param resource Identifier of the target resource that is the recipient of the requested token.
      * @param clientId The identifier of the client requesting the token.
      * @param clientSecret The secure secret of the client requesting the token.
-     * @return An instance of {@link AuthenticationResult} that contians an access token and refresh token.
+     * @return An instance of {@link AuthenticationResult} that contains an access token and refresh token.
      * 
      * @throws ExecutionException {@link ExecutionException}
      * @throws InterruptedException {@link InterruptedException}

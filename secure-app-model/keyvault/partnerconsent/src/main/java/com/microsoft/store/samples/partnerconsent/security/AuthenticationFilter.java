@@ -25,6 +25,7 @@ import javax.naming.ServiceUnavailableException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -102,6 +103,11 @@ public class AuthenticationFilter implements Filter
      * The secret of the client requesting the token.
      */
     private String clientSecret;
+
+    /**
+     * The redirect address used when requesting the token.
+     */
+    private String redirectUrl;
 
     /**
      * Provides a secure mechanism for retrieving and store sensitive information.
@@ -224,14 +230,15 @@ public class AuthenticationFilter implements Filter
      */
     public void init(FilterConfig config) throws ServletException 
     {
-        clientId = config.getInitParameter("client_id");
-        authority = config.getServletContext().getInitParameter("authority");
-        clientSecret = config.getInitParameter("client_secret");
+        authority = getConfigValue(config.getServletContext(), "authority");
+        clientId = getConfigValue(config, "client_id");
+        clientSecret = getConfigValue(config, "client_secret");
+        redirectUrl = getConfigValue(config, "redirect_url");
 
         vault = new KeyVaultProvider(
-            config.getInitParameter("keyvault_base_url"),
-            config.getInitParameter("keyvault_client_id"),
-            config.getInitParameter("keyvault_client_secret"));
+            getConfigValue(config, "keyvault_base_url"),
+            getConfigValue(config, "keyvault_client_id"),
+            getConfigValue(config, "keyvault_client_secret"));
     }
 
     /**
@@ -267,13 +274,13 @@ public class AuthenticationFilter implements Filter
             service =  Executors.newFixedThreadPool(1);
 
             authContext = new AuthenticationContext(
-                MessageFormat.format("{0}common", authority), 
+                MessageFormat.format("{0}/common", authority), 
                 true, 
                 service);
 
             future = authContext.acquireTokenByAuthorizationCode(
                 code.getValue(),
-                new URI(request.getRequestURL().toString()),
+                new URI(redirectUrl),
                 new ClientCredential(
                     clientId,
                     clientSecret), 
@@ -321,7 +328,7 @@ public class AuthenticationFilter implements Filter
                 clientSecret);
 
             authContext = new AuthenticationContext(
-                MessageFormat.format("{0}common", authority), 
+                MessageFormat.format("{0}/common", authority), 
                 true, 
                 service);
 
@@ -350,6 +357,41 @@ public class AuthenticationFilter implements Filter
     }
 
     /**
+     * Gets the configuration value.
+     * 
+     * @param config The object containing the filter's configuration and initialization parameters 
+     * @param name The name of the configuration.
+     * @return The value for the specified configuration.
+     */
+    private String getConfigValue(FilterConfig config, String name)
+    {
+        return isNullOrEmpty(config.getInitParameter(name)) ? System.getenv(name) : config.getInitParameter(name);
+    }
+
+    /**
+     * Gets the configuration value.
+     * 
+     * @param context The context for the servlet. 
+     * @param name The name of the configuration.
+     * @return The value for the specified configuration.
+     */
+    private String getConfigValue(ServletContext context, String name)
+    {
+        return isNullOrEmpty(context.getInitParameter(name)) ? System.getenv(name) : context.getInitParameter(name);
+    }
+
+    /**
+     * Indicates whether the specified string is null or an empty string ("").
+     * 
+     * @param value The string to be tested.
+     * @return true if the value parameter is null or an empty string (""); otherwise, false.
+     */
+    private boolean isNullOrEmpty(String value)
+    {
+        return value == null || value.isEmpty();
+    }
+
+    /**
      * Removes the state information from the HTTP session.
      * 
      * @throws Exception If the state information was not found in the HTTP session.
@@ -362,7 +404,7 @@ public class AuthenticationFilter implements Filter
         Map<String, StateData> states; 
         Map.Entry<String, StateData> entry;
         StateData stateData; 
-        String state = request.getParameter("state");
+        String state = request.getParameter(STATE_NAME);
         long difference; 
 
         if(StringUtils.isNotEmpty(state))
@@ -441,7 +483,7 @@ public class AuthenticationFilter implements Filter
 
             authResult = getAccessToken(request, oidcResponse.getAuthorizationCode());
 
-            // Validate the nonce to prevent replay attacks (code maybe substitued to one with broader access).
+            // Validate the nonce to prevent replay attacks (code maybe substituted to one with broader access).
             nonce = (String)JWTParser.parse(authResult.getIdToken()).getJWTClaimsSet().getClaim("nonce");
 
             if(StringUtils.isEmpty(nonce) || !nonce.equals(stateData.getNonce()))
@@ -481,14 +523,12 @@ public class AuthenticationFilter implements Filter
         String state = UUID.randomUUID().toString();
 
         String redirectUri = MessageFormat.format(
-            "{0}common/oauth2/authorize?response_type=code&scope=openid&response_mode=form_post&redirect_uri={1}&client_id={2}&state={3}&nonce={4}", 
+            "{0}/common/oauth2/authorize?response_type=code&scope=openid&response_mode=form_post&redirect_uri={1}&client_id={2}&state={3}&nonce={4}", 
             authority,
-            URLEncoder.encode(request.getRequestURL().toString(), "UTF-8"),
+            URLEncoder.encode(redirectUrl, "UTF-8"),
             clientId,
             state, 
             nonce);
-
-        response.setStatus(302);
 
         if(request.getSession().getAttribute(STATE_NAME) == null)
         {
@@ -497,6 +537,7 @@ public class AuthenticationFilter implements Filter
 
         ((Map<String, StateData>) request.getSession().getAttribute(STATE_NAME)).put(state, new StateData(nonce, new Date()));
 
+        response.setStatus(302);
         response.sendRedirect(redirectUri);
     }
 
