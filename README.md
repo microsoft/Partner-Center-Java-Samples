@@ -1,6 +1,14 @@
-# Partner Center Java SDK Samples
+---
+page_type: sample
+languages:
+- java
+name: "Microsoft Partner Center Java SDK Samples"
+description: "Learn how to use the Microsoft Partner Center Java SDK in your apps."
+products:
+- partner-center
+---
 
-![Build status](https://dev.azure.com/partnercenter/sdk/_apis/build/status/partner-center-java-samples-CI)
+# Partner Center Java SDK Samples
 
 This repository contains samples for the Partner Center Java SDK.
 
