@@ -10,6 +10,8 @@ products:
 
 # Partner Center Java SDK Samples
 
+[![Build Status](https://dev.azure.com/isaiahwilliams/community/_apis/build/status/partner-center-java-samples/partner-center-java-samples%20CI?branchName=master)](https://dev.azure.com/isaiahwilliams/community/_build/latest?definitionId=15&branchName=master)
+
 This repository contains samples for the Partner Center Java SDK.
 
 ## Samples List
