@@ -1,3 +1,13 @@
+---
+page_type: sample
+languages:
+- java
+description: "Learn how to use the Secure Application Model using the Partner Center Java SDK in your apps."
+products:
+- azure
+- ms-graph
+---
+
 # Secure App Model
 
 ## Overview
