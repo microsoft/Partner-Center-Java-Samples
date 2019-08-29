@@ -1,4 +1,15 @@
-# SDK Samples
+---
+page_type: sample
+languages:
+- java
+name: Partner Center Java SDK Samples
+description: Learn how to use the Partner Center Java SDK in your apps."
+products:
+- azure
+- ms-graph
+---
+
+# Partner Center Java SDK Samples
 
 ## Overview
 

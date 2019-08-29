@@ -2,7 +2,8 @@
 page_type: sample
 languages:
 - java
-description: "Learn how to use the Secure Application Model using the Partner Center Java SDK in your apps."
+name: Secure Application Model sample in Java
+description: Learn how to use the Secure Application Model with the Partner Center Java SDK in your apps.
 products:
 - azure
 - ms-graph
