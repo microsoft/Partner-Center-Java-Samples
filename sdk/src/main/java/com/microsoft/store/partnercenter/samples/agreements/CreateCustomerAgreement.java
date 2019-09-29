@@ -1,8 +1,5 @@
-// -----------------------------------------------------------------------
-// <copyright file="CreateCustomerAgreement.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See the LICENSE file in the project root for full license information.
 
 package com.microsoft.store.partnercenter.samples.agreements;
 
@@ -11,7 +8,6 @@ import java.text.MessageFormat;
 import com.microsoft.store.partnercenter.IAggregatePartner;
 import com.microsoft.store.partnercenter.models.Contact;
 import com.microsoft.store.partnercenter.models.agreements.Agreement;
-import com.microsoft.store.partnercenter.models.agreements.AgreementType;
 import com.microsoft.store.partnercenter.samples.BasePartnerScenario;
 import com.microsoft.store.partnercenter.samples.IScenarioContext;
 import com.microsoft.store.partnercenter.utils.StringHelper;
@@ -70,16 +66,16 @@ public class CreateCustomerAgreement
         agreement.setDateAgreed(new DateTime());
         agreement.setPrimaryContact(contact);
         agreement.setTemplateId(agreementTemplateId);
-        agreement.setType(AgreementType.MICROSOFT_CLOUD_AGREEMENT);
+        agreement.setType("MicrosoftCustomerAgreement");
         agreement.setUserId(selectedUserId);
 
         this.getContext().getConsoleHelper().writeObject(agreement, "New Agreement");
         this.getContext().getConsoleHelper().startProgress("Creating Agreement");
 
-        Agreement newlyCreatedagreement = partnerOperations.getCustomers().byId(selectedCustomerId).getAgreements().create(agreement);
+        Agreement newlyCreatedAgreement = partnerOperations.getCustomers().byId(selectedCustomerId).getAgreements().create(agreement);
 
         this.getContext().getConsoleHelper().stopProgress();
         this.getContext().getConsoleHelper().success("Create new agreement successfully!");
-        this.getContext().getConsoleHelper().writeObject(newlyCreatedagreement, "Newly created agreement Information");
+        this.getContext().getConsoleHelper().writeObject(newlyCreatedAgreement, "Newly created agreement Information");
 	}
 }

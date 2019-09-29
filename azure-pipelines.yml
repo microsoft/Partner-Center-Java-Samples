@@ -1,51 +1,63 @@
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-latest'
+    mac:
+      imageName: 'macOS-latest'
+    windows:
+      imageName: 'windows-latest'
+
+pool:
+  vmImage: $(imageName)
+
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+variables:
+  LoggingOptions: '-Dorg.slf4j.simpleLogger.defaultLogLevel=error -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
 
 steps:
 - task: Maven@3
+  displayName: 'Build SDK samples'
   inputs:
     mavenPomFile: 'sdk/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+    options: '-DpackageOutputDirectory=$(Build.ArtifactStagingDirectory)" -am'
+    mavenOptions: '$(LoggingOptions)'
+    publishJUnitResults: true 
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    findBugsRunAnalysis: true
 
 - task: Maven@3
+  displayName: 'Build secure application model CPV sample'
   inputs:
     mavenPomFile: 'secure-app-model/keyvault/cpvsample/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+    options: '-DpackageOutputDirectory=$(Build.ArtifactStagingDirectory)" -am'
+    mavenOptions: '$(LoggingOptions)'
+    publishJUnitResults: true 
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    findBugsRunAnalysis: true
 
 - task: Maven@3
+  displayName: 'Build secure application model CSP sample'
   inputs:
     mavenPomFile: 'secure-app-model/keyvault/cspsample/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+    options: '-DpackageOutputDirectory=$(Build.ArtifactStagingDirectory)" -am'
+    mavenOptions: '$(LoggingOptions)'
+    publishJUnitResults: true 
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    findBugsRunAnalysis: true
 
 - task: Maven@3
+  displayName: 'Build secure application model partner consent sample'
   inputs:
     mavenPomFile: 'secure-app-model/keyvault/partnerconsent/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-    
+    options: '-DpackageOutputDirectory=$(Build.ArtifactStagingDirectory)" -am'
+    mavenOptions: '$(LoggingOptions)'
+    publishJUnitResults: true 
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    findBugsRunAnalysis: true
+        

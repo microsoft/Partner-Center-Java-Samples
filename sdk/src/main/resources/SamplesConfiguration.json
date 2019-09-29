@@ -1,13 +1,13 @@
 {
   "PartnerServiceSettings": {
     "PartnerServiceApiEndpoint": "https://api.partnercenter.microsoft.com",
-    "AuthenticationAuthorityEndpoint": "https://login.windows.net/",
-    "GraphEndpoint": "https://graph.windows.net",
+    "AuthenticationAuthorityEndpoint": "https://login.microsoftonline.com/",
+    "GraphEndpoint": "https://graph.windows.net/.default",
     "CommonDomain": "common"
   },
   "UserAuthentication": {
     "ClientId": "<Enter your app-id here>",
-    "ResourceUrl": "https://api.partnercenter.microsoft.com"
+    "Scope": "https://api.partnercenter.microsoft.com/user_impersonation"
   },
   "AppAuthentication": {
     "ApplicationId": "<Enter your app-id here>",

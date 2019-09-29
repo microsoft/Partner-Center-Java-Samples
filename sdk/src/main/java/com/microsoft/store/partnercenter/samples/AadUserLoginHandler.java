@@ -1,27 +1,19 @@
-// -----------------------------------------------------------------------
-// <copyright file="AadUserLoginHandler.java" company="Microsoft">
-//      Copyright (c) Microsoft Corporation. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See the LICENSE file in the project root for full license information.
 
 package com.microsoft.store.partnercenter.samples;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.time.Instant;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
-import com.microsoft.aad.adal4j.AdalErrorCode;
-import com.microsoft.aad.adal4j.AuthenticationContext;
-import com.microsoft.aad.adal4j.AuthenticationException;
-import com.microsoft.aad.adal4j.AuthenticationResult;
-import com.microsoft.aad.adal4j.DeviceCode;
+import com.microsoft.aad.msal4j.DeviceCode;
+import com.microsoft.aad.msal4j.DeviceCodeFlowParameters;
+import com.microsoft.aad.msal4j.IAuthenticationResult;
+import com.microsoft.aad.msal4j.PublicClientApplication;
 import com.microsoft.store.partnercenter.AuthenticationToken;
 import com.microsoft.store.partnercenter.IAadLoginHandler;
-import com.microsoft.store.partnercenter.exception.PartnerException;
 import com.microsoft.store.partnercenter.samples.configuration.ConfigurationHolder;
 
 import org.joda.time.DateTime;
@@ -37,122 +29,69 @@ public class AadUserLoginHandler
     @Override
     public AuthenticationToken authenticate()
     {
-        AuthenticationContext context = null;
-        AuthenticationResult result = null;
-        Instant expiresOn; 
-        DeviceCode deviceCode;
-        ExecutorService service = null;
-
-        // read AAD configuration
-        String authority =
-            ConfigurationHolder.getInstance().getConfiguration().getPartnerServiceSettings().get( "AuthenticationAuthorityEndpoint" );
-        String commonDomain =
-            ConfigurationHolder.getInstance().getConfiguration().getPartnerServiceSettings().get( "CommonDomain" );
-        String resourceUrl =
-            ConfigurationHolder.getInstance().getConfiguration().getUserAuthentication().get( "ResourceUrl" );
-        String clientId =
-            ConfigurationHolder.getInstance().getConfiguration().getUserAuthentication().get( "ClientId" );
+        CompletableFuture<IAuthenticationResult> future;
+        Consumer<DeviceCode> deviceCodeConsumer;
+        IAuthenticationResult authResult = null;
+        PublicClientApplication app;
+        String authority; 
+        String clientId;
+        String scope;
 
         try
         {
-            URI addAuthority = new URI( authority ).resolve( new URI( commonDomain ) );
+            authority = ConfigurationHolder
+                .getInstance()
+                .getConfiguration()
+                .getPartnerServiceSettings()
+                .get("AuthenticationAuthorityEndpoint");
 
-            service = Executors.newFixedThreadPool( 1 );
-            context = new AuthenticationContext( addAuthority.toString(), false, service );
-         
-            deviceCode = context.acquireDeviceCode(clientId, resourceUrl, null).get(); 
-            expiresOn = Instant.now().plusSeconds(deviceCode.getExpiresIn());
+            clientId = ConfigurationHolder
+                .getInstance()
+                .getConfiguration()
+                .getUserAuthentication()
+                .get("ClientId");
+            
+            scope = ConfigurationHolder
+                .getInstance()
+                .getConfiguration()
+                .getUserAuthentication()
+                .get("Scope");
 
-            System.out.println(deviceCode.getMessage());
-      
-            result = SendTokenRequest(context, deviceCode, expiresOn);
-        }
-        catch (ExecutionException ex)
-        {
-            ex.printStackTrace();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-        catch ( URISyntaxException e )
-        {
-            e.printStackTrace();
-        }
-        catch ( InterruptedException e )
-        {
-            e.printStackTrace();
-        }
+            app = PublicClientApplication.builder(clientId)
+                .authority(authority + "/common")
+                .build();
 
-        finally
-        {
-            service.shutdown();
-        }
+            deviceCodeConsumer = (DeviceCode deviceCode) -> {
+                System.out.println(deviceCode.message());
+            };    
+            
+            future = app.acquireToken(
+                DeviceCodeFlowParameters.builder(
+                    Collections.singleton(scope),
+                    deviceCodeConsumer)
+                .build());
 
-        if ( result == null )
-        {
-            throw new NullPointerException( "authentication result was null" );
-        }
-
-        return new AuthenticationToken( result.getAccessToken(), new DateTime( result.getExpiresOnDate() ) );
-    }
-
-    private AuthenticationResult SendTokenRequest(AuthenticationContext context, DeviceCode deviceCode, Instant expiresOn)
-    {
-        AuthenticationResult result = null;
-        long duration; 
-
-        duration = expiresOn.getEpochSecond() - Instant.now().getEpochSecond();
-
-        while(duration > 0)
-        {
-            try
-            {
-                result = context.acquireTokenByDeviceCode(deviceCode, null).get();
-                break;
-            }
-            catch(AuthenticationException ex)
-            {
-                if(ex.getErrorCode() != AdalErrorCode.AUTHORIZATION_PENDING)
-                {
-                    throw ex; 
-                }
-            }
-            catch (ExecutionException ex)
-            {
-                if(ex.getCause() instanceof AuthenticationException)
-                {
-                    if(((AuthenticationException)ex.getCause()).getErrorCode() != AdalErrorCode.AUTHORIZATION_PENDING)
-                    {
-                        ex.printStackTrace();
-                    }
-                }
-                else 
+            future.handle((result, ex) -> {
+                if(ex != null) 
                 {
                     ex.printStackTrace();
                 }
-            }
-            catch (InterruptedException ex)
-            {
-                ex.printStackTrace();
-            }
-            
-            try
-            {
-                Thread.sleep(deviceCode.getInterval() * 1000);
-            }
-            catch(InterruptedException ex)
-            {
-            }
 
-            duration = expiresOn.getEpochSecond() - Instant.now().getEpochSecond();
+                return result;
+            });
+
+            authResult = future.join();
+
+            if ( authResult == null )
+            {
+                throw new NullPointerException( "authentication result was null" );
+            }
         }
-
-        if(result == null)
+        catch(IOException ex)
         {
-            throw new PartnerException("Verification code expired before contacting the server.");
+            ex.printStackTrace();
         }
 
-        return result;
+        return new AuthenticationToken(authResult.accessToken(), new DateTime(authResult.expiresOnDate()));
     }
 }
