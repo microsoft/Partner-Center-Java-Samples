@@ -47,12 +47,14 @@ public class ScenarioContext
         if ( this.appPartnerOperations == null )
         {
             System.out.println( "Authenticating application... " );
+            
             IPartnerCredentials appCredentials =
-                PartnerCredentials.getInstance().generateByApplicationCredentials( ConfigurationHolder.getInstance().getConfiguration().getAppAuthentication().get( "ApplicationId" ),
-                                                                     ConfigurationHolder.getInstance().getConfiguration().getAppAuthentication().get( "ApplicationSecret" ),
-                                                                     ConfigurationHolder.getInstance().getConfiguration().getAppAuthentication().get( "Domain" ),
-                                                                     ConfigurationHolder.getInstance().getConfiguration().getPartnerServiceSettings().get( "AuthenticationAuthorityEndpoint" ),
-                                                                     ConfigurationHolder.getInstance().getConfiguration().getPartnerServiceSettings().get( "GraphEndpoint" ) );
+                PartnerCredentials.getInstance().generateByApplicationCredentials( 
+                    ConfigurationHolder.getInstance().getConfiguration().getAppAuthentication().get("ApplicationId"),
+                    ConfigurationHolder.getInstance().getConfiguration().getAppAuthentication().get("ApplicationSecret"),
+                    ConfigurationHolder.getInstance().getConfiguration().getAppAuthentication().get("Domain"),
+                    ConfigurationHolder.getInstance().getConfiguration().getPartnerServiceSettings().get("AuthenticationAuthorityEndpoint"),
+                    ConfigurationHolder.getInstance().getConfiguration().getPartnerServiceSettings().get("GraphEndpoint"));
 
             System.out.println( "Authenticated!" );
             this.appPartnerOperations = PartnerService.getInstance().createPartnerOperations( appCredentials );
