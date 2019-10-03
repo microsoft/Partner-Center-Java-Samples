@@ -1,6 +1,6 @@
 # Partner Center SDK for Java Samples
 
-[![Build Status](https://dev.azure.com/isaiahwilliams/public/_apis/build/status/partner-center-java-samples?branchName=master)](https://dev.azure.com/isaiahwilliams/public/_build/latest?definitionId=27&branchName=master)
+[![Build Status](https://dev.azure.com/isaiahwilliams/public/_apis/build/status/partner-center-java-samples?branchName=master)](https://dev.azure.com/isaiahwilliams/public/_build/latest?definitionId=41&branchName=master)
 
 This repository contains samples for the Partner Center SDK for Java.
 
@@ -8,7 +8,7 @@ This repository contains samples for the Partner Center SDK for Java.
 
 | Sample Name | Description |
 |-------------|-------------|
-| [SDK Samples](sdk/README.md) | Console application that demonstrates each scenario the Partner Center Java SDK is capable of performing.|
+| [SDK Samples](sdk/README.md) | Console application that demonstrates each scenario the Partner Center SDK for Java is capable of performing.|
 | [Secure Application Model](secure-app-model/README.md) | A set of projects that demonstrate how a Control Panel Vendor (CPV) and a Cloud Solution Provider (CSP) should implement the Secure Application Model. |
 
 ## Reporting Security Issues
