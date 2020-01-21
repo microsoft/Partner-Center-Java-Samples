@@ -121,7 +121,6 @@ import com.microsoft.store.partnercenter.samples.ratecards.GetAzureRateCard;
 import com.microsoft.store.partnercenter.samples.ratecards.GetAzureSharedRateCard;
 import com.microsoft.store.partnercenter.samples.ratedusage.GetCustomerSubscriptionsUsage;
 import com.microsoft.store.partnercenter.samples.ratedusage.GetCustomerUsageSummary;
-import com.microsoft.store.partnercenter.samples.ratedusage.GetSubscriptionResourceUsage;
 import com.microsoft.store.partnercenter.samples.ratedusage.GetSubscriptionUsageRecords;
 import com.microsoft.store.partnercenter.samples.ratedusage.GetSubscriptionUsageSummary;
 import com.microsoft.store.partnercenter.samples.serviceincidents.GetServiceIncidents;
@@ -295,7 +294,6 @@ public class Program
 
         ratedUsageScenarios.add( new GetCustomerUsageSummary( context ) );
         ratedUsageScenarios.add( new GetCustomerSubscriptionsUsage( context ) );
-        ratedUsageScenarios.add( new GetSubscriptionResourceUsage( context ) );
         ratedUsageScenarios.add( new GetSubscriptionUsageRecords( context ) );
         ratedUsageScenarios.add( new GetSubscriptionUsageSummary( context ) );
 
