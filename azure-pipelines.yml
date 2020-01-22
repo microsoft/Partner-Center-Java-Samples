@@ -1,11 +1,15 @@
+
 strategy:
   matrix:
-    linux:
+    Linux:
       imageName: 'ubuntu-latest'
-    mac:
+    macOS:
       imageName: 'macOS-latest'
-    windows:
+    Windows:
       imageName: 'windows-latest'
+
+trigger:
+- master
 
 pool:
   vmImage: $(imageName)
@@ -58,3 +62,5 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     findBugsRunAnalysis: true
         
+- task: ms.vss-governance-buildtask.governance-build-task-component-detection.ComponentGovernanceComponentDetection@0 
+  displayName: 'Component Detection'
