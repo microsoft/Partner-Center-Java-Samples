@@ -1,7 +1,7 @@
 {
   "PartnerServiceSettings": {
     "PartnerServiceApiEndpoint": "https://api.partnercenter.microsoft.com",
-    "AuthenticationAuthorityEndpoint": "https://login.microsoftonline.com/",
+    "AuthenticationAuthorityEndpoint": "https://login.microsoftonline.com",
     "GraphEndpoint": "https://graph.windows.net/",
     "CommonDomain": "common"
   },
@@ -25,6 +25,7 @@
     "DefaultCatalogItemId": "",
     "DefaultCartId": "",
     "DefaultConfigurationPolicyId": "",
+    "DefaultCurrencyCode": "",
     "DefaultCustomerId": "",
     "DefaultCustomerIdForUsage": "",
     "DefaultCustomerUserId": "",

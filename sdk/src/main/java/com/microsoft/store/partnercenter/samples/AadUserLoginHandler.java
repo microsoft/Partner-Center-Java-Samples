@@ -35,6 +35,7 @@ public class AadUserLoginHandler
         PublicClientApplication app;
         String authority; 
         String clientId;
+        String commonDomain;
         String scope;
 
         try
@@ -51,6 +52,12 @@ public class AadUserLoginHandler
                 .getUserAuthentication()
                 .get("ClientId");
             
+            commonDomain = ConfigurationHolder
+                .getInstance()
+                .getConfiguration()
+                .getPartnerServiceSettings()
+                .get("CommonDomain");
+
             scope = ConfigurationHolder
                 .getInstance()
                 .getConfiguration()
@@ -58,7 +65,7 @@ public class AadUserLoginHandler
                 .get("Scope");
 
             app = PublicClientApplication.builder(clientId)
-                .authority(authority + "/common")
+                .authority(authority + "/" + commonDomain)
                 .build();
 
             deviceCodeConsumer = (DeviceCode deviceCode) -> {

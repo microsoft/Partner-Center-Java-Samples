@@ -88,6 +88,7 @@ import com.microsoft.store.partnercenter.samples.invoice.GetInvoiceLineItems;
 import com.microsoft.store.partnercenter.samples.invoice.GetInvoiceStatement;
 import com.microsoft.store.partnercenter.samples.invoice.GetInvoiceSummary;
 import com.microsoft.store.partnercenter.samples.invoice.GetPagedInvoices;
+import com.microsoft.store.partnercenter.samples.invoice.GetUsageLineItemsForOpenPeriod;
 import com.microsoft.store.partnercenter.samples.offers.GetCustomerOfferCategories;
 import com.microsoft.store.partnercenter.samples.offers.GetCustomerOffers;
 import com.microsoft.store.partnercenter.samples.offers.GetOffer;
@@ -150,7 +151,7 @@ public class Program
      * 
      * @param args Program arguments.
      */
-    public static void main( String[] args )
+    public static void main(String[] args)
     {
         ScenarioContext context = new ScenarioContext();
         List<IPartnerScenario> mainScenarios = new ArrayList<IPartnerScenario>();
@@ -182,7 +183,7 @@ public class Program
         mainScenarios.add(Program.getEntitlementScenarios(context));
 
         // run the main scenario
-        new AggregatePartnerScenario( "Partner Center Java SDK samples", mainScenarios, context ).run();
+        new AggregatePartnerScenario("Partner Center Java SDK samples", mainScenarios, context).run();
     }
 
     /**
@@ -191,36 +192,36 @@ public class Program
      * @param context A scenario context.
      * @return The customer scenarios.
      */
-    private static IPartnerScenario getCustomerScenarios( IScenarioContext context )
+    private static IPartnerScenario getCustomerScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> customerFilteringScenarios = new ArrayList<IPartnerScenario>();
-        customerFilteringScenarios.add( new FilterCustomers( 
+        customerFilteringScenarios.add(new FilterCustomers(
             "Filter by company name", CustomerSearchField.COMPANY_NAME,
-            context ) );
-        customerFilteringScenarios.add( 
-            new FilterCustomers( "Filter by domain name", CustomerSearchField.DOMAIN_NAME,
-            context ) );
+            context));
+        customerFilteringScenarios.add(
+            new FilterCustomers("Filter by domain name", CustomerSearchField.DOMAIN_NAME,
+            context));
         
         List<IPartnerScenario> customerScenarios = new ArrayList<IPartnerScenario>();
 
-        customerScenarios.add( new CreateCustomer( context ) );
-        customerScenarios.add( new CheckDomainAvailability( context ) );
-        customerScenarios.add( new GetPagedCustomers( 
+        customerScenarios.add(new CreateCustomer(context));
+        customerScenarios.add(new CheckDomainAvailability(context));
+        customerScenarios.add(new GetPagedCustomers(
             context,
-            Integer.parseInt( context.getConfiguration().getScenarioSettings().get( "CustomerPageSize" ) ) ) );
-        customerScenarios.add( new AggregatePartnerScenario( 
+            Integer.parseInt(context.getConfiguration().getScenarioSettings().get("CustomerPageSize"))));
+        customerScenarios.add(new AggregatePartnerScenario(
             "Customer filtering", customerFilteringScenarios,
-            context ) );
-        customerScenarios.add( new GetCustomerDetails( context ) );
-        customerScenarios.add( new GetCustomerQualification( context ) );
-        customerScenarios.add( new UpdateCustomerQualification( context ) );
-        customerScenarios.add( new DeleteCustomerFromTipAccount( context ) );
-        customerScenarios.add( new GetCustomerManagedServices( context ) );
-        customerScenarios.add( new GetCustomerRelationshipRequest( context ) );
-        customerScenarios.add( new UpdateCustomerBillingProfile( context ) );
-        customerScenarios.add( new ValidateCustomerAddress( context ) );
+            context));
+        customerScenarios.add(new GetCustomerDetails(context));
+        customerScenarios.add(new GetCustomerQualification(context));
+        customerScenarios.add(new UpdateCustomerQualification(context));
+        customerScenarios.add(new DeleteCustomerFromTipAccount(context));
+        customerScenarios.add(new GetCustomerManagedServices(context));
+        customerScenarios.add(new GetCustomerRelationshipRequest(context));
+        customerScenarios.add(new UpdateCustomerBillingProfile(context));
+        customerScenarios.add(new ValidateCustomerAddress(context));
 
-        return new AggregatePartnerScenario( "Customer samples", customerScenarios, context );
+        return new AggregatePartnerScenario("Customer samples", customerScenarios, context);
     }
 
     /**
@@ -229,18 +230,18 @@ public class Program
      * @param context A scenario context.
      * @return The offer scenarios.
      */
-    private static IPartnerScenario getOfferScenarios( IScenarioContext context )
+    private static IPartnerScenario getOfferScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> offerScenarios = new ArrayList<IPartnerScenario>();
 
-        offerScenarios.add( new GetOffer( context ) );
-        offerScenarios.add( new GetOfferCategories( context ) );
-        offerScenarios.add( new GetOffers( context ) );
-        offerScenarios.add( new GetPagedOffers( context ) );
-        offerScenarios.add( new GetCustomerOffers( context ) );
-        offerScenarios.add( new GetCustomerOfferCategories( context ) );
+        offerScenarios.add(new GetOffer(context));
+        offerScenarios.add(new GetOfferCategories(context));
+        offerScenarios.add(new GetOffers(context));
+        offerScenarios.add(new GetPagedOffers(context));
+        offerScenarios.add(new GetCustomerOffers(context));
+        offerScenarios.add(new GetCustomerOfferCategories(context));
 
-        return new AggregatePartnerScenario( "Offer samples", offerScenarios, context );
+        return new AggregatePartnerScenario("Offer samples", offerScenarios, context);
     }
 
     /**
@@ -249,7 +250,7 @@ public class Program
      * @param context A scenario context.
      * @return The order scenarios.
      */
-    private static IPartnerScenario getOrderScenarios( IScenarioContext context )
+    private static IPartnerScenario getOrderScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> orderScenarios = new ArrayList<IPartnerScenario>();
 
@@ -258,7 +259,7 @@ public class Program
         orderScenarios.add(new GetOrders(context));
         orderScenarios.add(new CreateAzureReservationOrder(context));
 
-        return new AggregatePartnerScenario( "Order samples", orderScenarios, context );
+        return new AggregatePartnerScenario("Order samples", orderScenarios, context);
     }
 
     /**
@@ -267,7 +268,7 @@ public class Program
      * @param context A scenario context.
      * @return The subscription scenarios.
      */
-    private static IPartnerScenario getSubscriptionScenarios( IScenarioContext context )
+    private static IPartnerScenario getSubscriptionScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> subscriptionScenarios = new ArrayList<IPartnerScenario>();
 
@@ -279,7 +280,7 @@ public class Program
         subscriptionScenarios.add(new AddSubscriptionAddOn(context));
         subscriptionScenarios.add(new RegisterSubscription(context));
 
-        return new AggregatePartnerScenario( "Subscription samples", subscriptionScenarios, context );
+        return new AggregatePartnerScenario("Subscription samples", subscriptionScenarios, context);
     }
 
     /**
@@ -288,16 +289,16 @@ public class Program
      * @param context A scenario context.
      * @return The subscription scenarios.
      */
-    private static IPartnerScenario getRatedUsageScenarios( IScenarioContext context )
+    private static IPartnerScenario getRatedUsageScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> ratedUsageScenarios = new ArrayList<IPartnerScenario>();
 
-        ratedUsageScenarios.add( new GetCustomerUsageSummary( context ) );
-        ratedUsageScenarios.add( new GetCustomerSubscriptionsUsage( context ) );
-        ratedUsageScenarios.add( new GetSubscriptionUsageRecords( context ) );
-        ratedUsageScenarios.add( new GetSubscriptionUsageSummary( context ) );
+        ratedUsageScenarios.add(new GetCustomerUsageSummary(context));
+        ratedUsageScenarios.add(new GetCustomerSubscriptionsUsage(context));
+        ratedUsageScenarios.add(new GetSubscriptionUsageRecords(context));
+        ratedUsageScenarios.add(new GetSubscriptionUsageSummary(context));
 
-        return new AggregatePartnerScenario( "Rated Usage samples", ratedUsageScenarios, context );
+        return new AggregatePartnerScenario("Rated Usage samples", ratedUsageScenarios, context);
     }
 
     /**
@@ -306,19 +307,18 @@ public class Program
      * @param context A scenario context.
      * @return The service request scenarios.
      */
-    private static IPartnerScenario getServiceRequestScenarios( IScenarioContext context )
+    private static IPartnerScenario getServiceRequestScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> serviceRequestScenarios = new ArrayList<IPartnerScenario>();
 
-        serviceRequestScenarios.add( new CreatePartnerServiceRequest( context ) );
-        serviceRequestScenarios.add( new GetAllCustomerServiceRequests( context ) );
-        serviceRequestScenarios.add( new GetPagedPartnerServiceRequests( context,
-                Integer.parseInt( context.getConfiguration().getScenarioSettings().get( "ServiceRequestPageSize" ) ) ) );
-        serviceRequestScenarios.add( new GetPartnerServiceRequestDetails( context ) );
-        serviceRequestScenarios.add( new GetServiceRequestSupportTopics( context ) );
-        serviceRequestScenarios.add( new UpdatePartnerServiceRequest( context ) );
+        serviceRequestScenarios.add(new CreatePartnerServiceRequest(context));
+        serviceRequestScenarios.add(new GetAllCustomerServiceRequests(context));
+        serviceRequestScenarios.add(new GetPagedPartnerServiceRequests(context, Integer.parseInt(context.getConfiguration().getScenarioSettings().get("ServiceRequestPageSize"))));
+        serviceRequestScenarios.add(new GetPartnerServiceRequestDetails(context));
+        serviceRequestScenarios.add(new GetServiceRequestSupportTopics(context));
+        serviceRequestScenarios.add(new UpdatePartnerServiceRequest(context));
 
-        return new AggregatePartnerScenario( "Service request samples", serviceRequestScenarios, context );
+        return new AggregatePartnerScenario("Service request samples", serviceRequestScenarios, context);
     }
 
     /**
@@ -327,22 +327,19 @@ public class Program
      * @param context A scenario context.
      * @return The invoice scenarios.
      */
-    private static IPartnerScenario getInvoiceScenarios( IScenarioContext context )
+    private static IPartnerScenario getInvoiceScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> invoiceScenarios = new ArrayList<IPartnerScenario>();
 
-        invoiceScenarios.add( new GetInvoiceSummary( context ) );
-        invoiceScenarios.add( new GetInvoice( context ) );
-        invoiceScenarios.add( new GetInvoiceLineItems( 
-            context,
-            Integer.parseInt( context.getConfiguration().getScenarioSettings().get( "InvoicePageSize" ) ) ) );
-        invoiceScenarios.add( new GetPagedInvoices( 
-            context,
-            Integer.parseInt( context.getConfiguration().getScenarioSettings().get( "InvoicePageSize" ) ) ) );
-        invoiceScenarios.add ( new GetAccountBalance( context ) );
-        invoiceScenarios.add ( new GetInvoiceStatement(context) );
+        invoiceScenarios.add(new GetInvoiceSummary(context));
+        invoiceScenarios.add(new GetInvoice(context));
+        invoiceScenarios.add(new GetInvoiceLineItems(context, Integer.parseInt(context.getConfiguration().getScenarioSettings().get("InvoicePageSize"))));
+        invoiceScenarios.add(new GetPagedInvoices(context, Integer.parseInt(context.getConfiguration().getScenarioSettings().get("InvoicePageSize"))));
+        invoiceScenarios.add(new GetAccountBalance(context));
+        invoiceScenarios.add (new GetInvoiceStatement(context));
+        invoiceScenarios.add(new GetUsageLineItemsForOpenPeriod(context));
 
-        return new AggregatePartnerScenario( "Invoice samples", invoiceScenarios, context );
+        return new AggregatePartnerScenario("Invoice samples", invoiceScenarios, context);
     }
 
     /**
@@ -351,21 +348,21 @@ public class Program
      * @param context A scenario context.
      * @return The invoice scenarios.
      */
-    private static IPartnerScenario getProfileScenarios( IScenarioContext context )
+    private static IPartnerScenario getProfileScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> profileScenarios = new ArrayList<IPartnerScenario>();
 
-        profileScenarios.add( new GetBillingProfile( context ) );
-        profileScenarios.add( new GetLegalBusinessProfile( context ) );
-        profileScenarios.add( new GetOrganizationProfile( context ) );
-        profileScenarios.add( new GetMpnProfile( context ) );
-        profileScenarios.add( new GetSupportProfile( context ) );
-        profileScenarios.add( new UpdateBillingProfile( context ) );
-        profileScenarios.add( new UpdateLegalBusinessProfile( context ) );
-        profileScenarios.add( new UpdateOrganizationProfile( context ) );
-        profileScenarios.add( new UpdateSupportProfile( context ) );
+        profileScenarios.add(new GetBillingProfile(context));
+        profileScenarios.add(new GetLegalBusinessProfile(context));
+        profileScenarios.add(new GetOrganizationProfile(context));
+        profileScenarios.add(new GetMpnProfile(context));
+        profileScenarios.add(new GetSupportProfile(context));
+        profileScenarios.add(new UpdateBillingProfile(context));
+        profileScenarios.add(new UpdateLegalBusinessProfile(context));
+        profileScenarios.add(new UpdateOrganizationProfile(context));
+        profileScenarios.add(new UpdateSupportProfile(context));
 
-        return new AggregatePartnerScenario( "Partner Profile samples", profileScenarios, context );
+        return new AggregatePartnerScenario("Partner Profile samples", profileScenarios, context);
     }
 
     /**
@@ -374,27 +371,27 @@ public class Program
      * @param context A scenario context.
      * @return The invoice scenarios.
      */
-    private static IPartnerScenario getCustomerUserScenarios( IScenarioContext context )
+    private static IPartnerScenario getCustomerUserScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> customerUserScenarios = new ArrayList<IPartnerScenario>();
 
-        customerUserScenarios.add( new CreateCustomerUser( context ) );
-        customerUserScenarios.add( new DeleteCustomerUser ( context ) );
-        customerUserScenarios.add( new GetCustomerUserDetails( context ) );
-        customerUserScenarios.add( new UpdateCustomerUser( context ) );
-        customerUserScenarios.add( new GetPagedCustomerUsers ( context ) );
-        customerUserScenarios.add( new GetCustomerUserDirectoryRoles( context ) );
-        customerUserScenarios.add( new CustomerUserAssignedLicenses ( context ) );
-        customerUserScenarios.add( new CustomerUserAssignedGroup1AndGroup2Licenses( context ) );
-        customerUserScenarios.add( new CustomerUserAssignedGroup1Licenses ( context ) );
-        customerUserScenarios.add( new CustomerUserAssignedGroup2Licenses ( context ) );
-        customerUserScenarios.add( new CustomerUserAssignLicenses ( context ) );
-        customerUserScenarios.add( new CustomerUserAssignGroup1Licenses ( context ) );
-        customerUserScenarios.add( new CustomerUserAssignGroup2Licenses ( context ) );
-        customerUserScenarios.add( new GetCustomerInactiveUsers ( context ) );
-        customerUserScenarios.add( new CustomerUserRestore ( context ) );
+        customerUserScenarios.add(new CreateCustomerUser(context));
+        customerUserScenarios.add(new DeleteCustomerUser(context));
+        customerUserScenarios.add(new GetCustomerUserDetails(context));
+        customerUserScenarios.add(new UpdateCustomerUser(context));
+        customerUserScenarios.add(new GetPagedCustomerUsers(context));
+        customerUserScenarios.add(new GetCustomerUserDirectoryRoles(context));
+        customerUserScenarios.add(new CustomerUserAssignedLicenses(context));
+        customerUserScenarios.add(new CustomerUserAssignedGroup1AndGroup2Licenses(context));
+        customerUserScenarios.add(new CustomerUserAssignedGroup1Licenses(context));
+        customerUserScenarios.add(new CustomerUserAssignedGroup2Licenses(context));
+        customerUserScenarios.add(new CustomerUserAssignLicenses(context));
+        customerUserScenarios.add(new CustomerUserAssignGroup1Licenses(context));
+        customerUserScenarios.add(new CustomerUserAssignGroup2Licenses(context));
+        customerUserScenarios.add(new GetCustomerInactiveUsers(context));
+        customerUserScenarios.add(new CustomerUserRestore(context));
 
-        return new AggregatePartnerScenario( "Customer User samples", customerUserScenarios, context );
+        return new AggregatePartnerScenario("Customer User samples", customerUserScenarios, context);
     }
     
     /**
@@ -403,13 +400,13 @@ public class Program
      * @param context A scenario context.
      * @return The Customer subscribed skus scenarios.
      */
-    private static IPartnerScenario getCustomerSubscribedSkusScenarios( IScenarioContext context )
+    private static IPartnerScenario getCustomerSubscribedSkusScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> customerSubscribedSkusScenarios = new ArrayList<IPartnerScenario>();
 
-        customerSubscribedSkusScenarios.add( new CustomerSubscribedSkus( context ) );
+        customerSubscribedSkusScenarios.add(new CustomerSubscribedSkus(context));
         
-        return new AggregatePartnerScenario( "Customer Subscribed Skus samples", customerSubscribedSkusScenarios, context );
+        return new AggregatePartnerScenario("Customer Subscribed Skus samples", customerSubscribedSkusScenarios, context);
     }
 
     /**
@@ -418,16 +415,16 @@ public class Program
      * @param context A scenario context.
      * @return The directory role scenarios.
      */
-    private static IPartnerScenario getCustomerDirectoryRoleScenarios( IScenarioContext context )
+    private static IPartnerScenario getCustomerDirectoryRoleScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> customerDirectoryRoleScenarios = new ArrayList<IPartnerScenario>();
 
-        customerDirectoryRoleScenarios.add( new GetCustomerDirectoryRoles( context ) );
-        customerDirectoryRoleScenarios.add( new AddUserMemberToDirectoryRole( context ) );
-        customerDirectoryRoleScenarios.add( new GetCustomerDirectoryRoleUserMembers( context ) );
-        customerDirectoryRoleScenarios.add( new RemoveCustomerUserMemberFromDirectoryRole( context ) );
+        customerDirectoryRoleScenarios.add(new GetCustomerDirectoryRoles(context));
+        customerDirectoryRoleScenarios.add(new AddUserMemberToDirectoryRole(context));
+        customerDirectoryRoleScenarios.add(new GetCustomerDirectoryRoleUserMembers(context));
+        customerDirectoryRoleScenarios.add(new RemoveCustomerUserMemberFromDirectoryRole(context));
 
-        return new AggregatePartnerScenario( "Customer Directory Role samples", customerDirectoryRoleScenarios, context );
+        return new AggregatePartnerScenario("Customer Directory Role samples", customerDirectoryRoleScenarios, context);
     }
 
     /**
@@ -436,14 +433,14 @@ public class Program
      * @param context A scenario context.
      * @return The invoice scenarios.
      */
-    private static IPartnerScenario getAuditRecordScenarios( IScenarioContext context )
+    private static IPartnerScenario getAuditRecordScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> auditRecordScenarios = new ArrayList<IPartnerScenario>();
 
-        auditRecordScenarios.add( new GetAuditRecords( context ) );
-        auditRecordScenarios.add( new SearchAuditRecords( context ) );
+        auditRecordScenarios.add(new GetAuditRecords(context));
+        auditRecordScenarios.add(new SearchAuditRecords(context));
 
-        return new AggregatePartnerScenario( "Auditing samples", auditRecordScenarios, context );
+        return new AggregatePartnerScenario("Auditing samples", auditRecordScenarios, context);
     }
 
     /**
@@ -452,14 +449,14 @@ public class Program
      * @param context A scenario context.
      * @return The rate card scenarios.
      */
-    private static IPartnerScenario getRateCardScenarios( IScenarioContext context )
+    private static IPartnerScenario getRateCardScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> rateCardScenarios = new ArrayList<IPartnerScenario>();
 
-        rateCardScenarios.add( new GetAzureRateCard( context ) );
-        rateCardScenarios.add( new GetAzureSharedRateCard( context ));
+        rateCardScenarios.add(new GetAzureRateCard(context));
+        rateCardScenarios.add(new GetAzureSharedRateCard(context));
 
-        return new AggregatePartnerScenario( "Rate Card samples", rateCardScenarios, context );
+        return new AggregatePartnerScenario("Rate Card samples", rateCardScenarios, context);
     }
 
     /**
@@ -468,19 +465,19 @@ public class Program
      * @param context A scenario context.
      * @return The invoice scenarios.
      */
-    private static IPartnerScenario getIndirectModelScenarios( IScenarioContext context )
+    private static IPartnerScenario getIndirectModelScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> indirectModelScenarios = new ArrayList<IPartnerScenario>();
 
-        indirectModelScenarios.add( new GetIndirectResellers( context ) );
-        indirectModelScenarios.add( new CreateCustomerForIndirectReseller( context ) );
-        indirectModelScenarios.add( new GetIndirectResellersOfCustomer( context ) );
-        indirectModelScenarios.add( new PlaceOrderForCustomer( context ) );
-        indirectModelScenarios.add( new GetCustomersOfIndirectReseller( context ) );
-        indirectModelScenarios.add( new VerifyPartnerMpnId( context ) );
-        indirectModelScenarios.add( new GetSubscriptionsByMpnId( context ) );
+        indirectModelScenarios.add(new GetIndirectResellers(context));
+        indirectModelScenarios.add(new CreateCustomerForIndirectReseller(context));
+        indirectModelScenarios.add(new GetIndirectResellersOfCustomer(context));
+        indirectModelScenarios.add(new PlaceOrderForCustomer(context));
+        indirectModelScenarios.add(new GetCustomersOfIndirectReseller(context));
+        indirectModelScenarios.add(new VerifyPartnerMpnId(context));
+        indirectModelScenarios.add(new GetSubscriptionsByMpnId(context));
 
-        return new AggregatePartnerScenario( "Indirect model samples", indirectModelScenarios, context );
+        return new AggregatePartnerScenario("Indirect model samples", indirectModelScenarios, context);
     }
 
     /**
@@ -489,13 +486,13 @@ public class Program
      * @param context A scenario context.
      * @return The invoice scenarios.
      */
-    private static IPartnerScenario getServiceIncidentScenarios( IScenarioContext context )
+    private static IPartnerScenario getServiceIncidentScenarios(IScenarioContext context)
     {
         List<IPartnerScenario> serviceIncidentScenarios = new ArrayList<IPartnerScenario>();
 
-        serviceIncidentScenarios.add( new GetServiceIncidents( context ) );
+        serviceIncidentScenarios.add(new GetServiceIncidents(context));
         
-        return new AggregatePartnerScenario( "Service Incident samples", serviceIncidentScenarios, context );   
+        return new AggregatePartnerScenario("Service Incident samples", serviceIncidentScenarios, context);   
     }
 
     /**
@@ -508,12 +505,12 @@ public class Program
     {
         List<IPartnerScenario> partnerAnalyticsScenarios = new ArrayList<IPartnerScenario>();
 
-        partnerAnalyticsScenarios.add( new GetPartnerLicensesDeploymentAnalytics( context ) );
-        partnerAnalyticsScenarios.add( new GetPartnerLicensesUsageAnalytics( context ) );
-        partnerAnalyticsScenarios.add( new GetCustomerLicensesDeploymentAnalytics( context ) );
-        partnerAnalyticsScenarios.add( new GetCustomerLicensesUsageAnalytics( context ) );
+        partnerAnalyticsScenarios.add(new GetPartnerLicensesDeploymentAnalytics(context));
+        partnerAnalyticsScenarios.add(new GetPartnerLicensesUsageAnalytics(context));
+        partnerAnalyticsScenarios.add(new GetCustomerLicensesDeploymentAnalytics(context));
+        partnerAnalyticsScenarios.add(new GetCustomerLicensesUsageAnalytics(context));
 
-        return new AggregatePartnerScenario( "Partner Analytics samples", partnerAnalyticsScenarios , context );   
+        return new AggregatePartnerScenario("Partner Analytics samples", partnerAnalyticsScenarios , context);   
     }
 
     /**
@@ -526,17 +523,17 @@ public class Program
     {
         List<IPartnerScenario> customerProductsScenarios  = new ArrayList<IPartnerScenario>();
         
-        customerProductsScenarios.add( new GetCustomerProducts( context ) );
-        customerProductsScenarios.add( new GetCustomerProductsByTargetSegment( context ) );
-        customerProductsScenarios.add( new GetCustomerProduct( context ) );
-        customerProductsScenarios.add( new GetCustomerSkus( context ) );
-        customerProductsScenarios.add( new GetCustomerSkusByTargetSegment( context ) );
-        customerProductsScenarios.add( new GetCustomerSku( context ) );
-        customerProductsScenarios.add( new GetCustomerAvailabilities( context ) );
-        customerProductsScenarios.add( new GetCustomerAvailabilitiesByTargetSegment( context ) );
-        customerProductsScenarios.add( new GetCustomerAvailability( context ) );
+        customerProductsScenarios.add(new GetCustomerProducts(context));
+        customerProductsScenarios.add(new GetCustomerProductsByTargetSegment(context));
+        customerProductsScenarios.add(new GetCustomerProduct(context));
+        customerProductsScenarios.add(new GetCustomerSkus(context));
+        customerProductsScenarios.add(new GetCustomerSkusByTargetSegment(context));
+        customerProductsScenarios.add(new GetCustomerSku(context));
+        customerProductsScenarios.add(new GetCustomerAvailabilities(context));
+        customerProductsScenarios.add(new GetCustomerAvailabilitiesByTargetSegment(context));
+        customerProductsScenarios.add(new GetCustomerAvailability(context));
 
-        return new AggregatePartnerScenario( "Products for customers samples", customerProductsScenarios, context );   
+        return new AggregatePartnerScenario("Products for customers samples", customerProductsScenarios, context);   
     }
 
     /**
@@ -549,11 +546,11 @@ public class Program
     {
         List<IPartnerScenario> cartScenarios   = new ArrayList<IPartnerScenario>();
      
-        cartScenarios.add( new CreateCart( context ) );
-        cartScenarios.add( new UpdateCart( context ) );
-        cartScenarios.add( new CheckoutCart( context ) );
+        cartScenarios.add(new CreateCart(context));
+        cartScenarios.add(new UpdateCart(context));
+        cartScenarios.add(new CheckoutCart(context));
 
-        return new AggregatePartnerScenario( "Cart Scenarios", cartScenarios, context );   
+        return new AggregatePartnerScenario("Cart Scenarios", cartScenarios, context);   
     }
 
     /**
@@ -569,7 +566,7 @@ public class Program
         customerServiceCostsScenarios.add(new GetCustomerServiceCostsSummary(context));
         customerServiceCostsScenarios.add(new GetCustomerServiceCostsLineItems(context));
 
-        return new AggregatePartnerScenario( "Customer service costs samples", customerServiceCostsScenarios, context );   
+        return new AggregatePartnerScenario("Customer service costs samples", customerServiceCostsScenarios, context);   
     }
 
     /**
@@ -594,7 +591,7 @@ public class Program
         devicesScenarios.add(new DeleteDevice(context));
         devicesScenarios.add(new GetBatchUploadStatus(context));
 
-        return new AggregatePartnerScenario( "Devices", devicesScenarios, context );   
+        return new AggregatePartnerScenario("Devices", devicesScenarios, context);   
     }
 
     /**
@@ -607,9 +604,9 @@ public class Program
     {
         List<IPartnerScenario> entitlementScenarios   = new ArrayList<IPartnerScenario>();
 
-        entitlementScenarios.add(new GetEntitlements(context) );
+        entitlementScenarios.add(new GetEntitlements(context));
 
-        return new AggregatePartnerScenario( "Entitlements", entitlementScenarios, context );   
+        return new AggregatePartnerScenario("Entitlements", entitlementScenarios, context);   
     }
 
     /**
@@ -624,7 +621,7 @@ public class Program
 
         utilizationScnearios.add(new GetAzureSubscriptionUtilization(context));
 
-        return new AggregatePartnerScenario( "Utilization samples", utilizationScnearios, context );   
+        return new AggregatePartnerScenario("Utilization samples", utilizationScnearios, context);   
     }
 
     /**
@@ -648,7 +645,7 @@ public class Program
         productScenarios.add(new GetSkusByTargetSegment(context));
         productScenarios.add(new GetSkus(context));
 
-        return new AggregatePartnerScenario( "Product samples", productScenarios, context );   
+        return new AggregatePartnerScenario("Product samples", productScenarios, context);   
     }
 
     /**
@@ -663,7 +660,7 @@ public class Program
 
         addressValidationScenarios.add(new AddressValidation(context));
 
-        return new AggregatePartnerScenario( "Address validation samples", addressValidationScenarios, context );   
+        return new AggregatePartnerScenario("Address validation samples", addressValidationScenarios, context);   
     }
 
     /**
@@ -680,6 +677,6 @@ public class Program
         agreementsScenario.add(new GetCustomerAgreements(context));
         agreementsScenario.add(new CreateCustomerAgreement(context));
 
-        return new AggregatePartnerScenario( "Agreements", agreementsScenario, context );   
+        return new AggregatePartnerScenario("Agreements", agreementsScenario, context);   
     }
 }
