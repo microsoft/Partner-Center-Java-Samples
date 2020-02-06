@@ -31,7 +31,7 @@ public class GetUsageLineItemsForOpenPeriod
      */
     public GetUsageLineItemsForOpenPeriod(IScenarioContext context)
     {
-        super("Unbilled - Consumption - Reconciliation Line Items", context);
+        super("Get unbilled consumption reconciliation line items", context);
     }
 
     /**
