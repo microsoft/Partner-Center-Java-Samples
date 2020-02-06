@@ -38,15 +38,15 @@ public class GetAuditRecords extends BasePartnerScenario
         this.getContext().getConsoleHelper().stopProgress();
 
         // create an AuditRecord enumerator which will aid us in traversing the customer pages
-        IResourceCollectionEnumerator<SeekBasedResourceCollection<AuditRecord>> auditRecordssEnumerator =
+        IResourceCollectionEnumerator<SeekBasedResourceCollection<AuditRecord>> auditRecordsEnumerator =
             partnerOperations.getEnumerators().getAuditRecords().create( auditRecordsCollection );
 
-        while ( auditRecordssEnumerator.hasValue() )
+        while ( auditRecordsEnumerator.hasValue() )
         {
             // print the current customer results page
-        	System.out.println("Record count: " + auditRecordssEnumerator.getCurrent().getTotalCount());
+        	System.out.println("Record count: " + auditRecordsEnumerator.getCurrent().getTotalCount());
             
-            for (AuditRecord record : auditRecordssEnumerator.getCurrent().getItems())
+            for (AuditRecord record : auditRecordsEnumerator.getCurrent().getItems())
             {
             	System.out.println("Customer Id:    " + record.getCustomerId() );
             	System.out.println("Customer Name:  " + record.getCustomerName() );
@@ -74,7 +74,7 @@ public class GetAuditRecords extends BasePartnerScenario
             }
 
             System.out.println();
-            auditRecordssEnumerator.next();
+            auditRecordsEnumerator.next();
         }
 	}
 }
