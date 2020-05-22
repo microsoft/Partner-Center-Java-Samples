@@ -13,5 +13,6 @@ The required configurations for this sample are found in the [web.xml](src/main/
 * **keyvault_url** - The base address for the instance of Azure Key Vault you have deployed (e.g. <https://myvault.vault.azure.net/>).
 * **keyvault_cient_id** - The application identifier that you have configured to access the instance of Azure Key Vault.
 * **keyvault_client_secret** - The application secret associated with the application configured to access the instance of Azure Key Vault.
+* **keyvault_tenant_id** - The application tenant id associated with the application configured to access the instance of Azure Key Vault.
 
 Please note that in production scenarios we recommend that you use certificate based authentication to access the instance of Azure Key Vault. The [confidential client flow](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/wiki/Confidential-client-applications-flows) has been used in the sample for simplicity.

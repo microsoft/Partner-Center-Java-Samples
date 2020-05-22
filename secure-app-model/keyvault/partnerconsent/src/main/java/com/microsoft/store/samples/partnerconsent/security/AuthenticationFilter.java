@@ -235,7 +235,8 @@ public class AuthenticationFilter implements Filter
         vault = new KeyVaultProvider(
             getConfigValue(config, "keyvault_base_url"),
             getConfigValue(config, "keyvault_client_id"),
-            getConfigValue(config, "keyvault_client_secret"));
+            getConfigValue(config, "keyvault_client_secret"),
+            getConfigValue(config, "keyvault_tenant_id"));
     }
 
     /**

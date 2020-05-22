@@ -36,6 +36,10 @@
 			<param-value></param-value>
 		</init-param>
 		<init-param>
+			<param-name>keyvault_tenant_id</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
 			<param-name>keyvault_certifcate_path</param-name>
 			<param-value></param-value>
 		</init-param>

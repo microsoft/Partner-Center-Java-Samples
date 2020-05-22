@@ -161,7 +161,9 @@ public class AccessTokenProvider implements IAccessTokenProvider
         IVaultProvider vault = new KeyVaultProvider(
             properties.getProperty(PropertyName.KEY_VAULT_BASE_URL),
             properties.getProperty(PropertyName.KEY_VAULT_CLIENT_ID), 
-            properties.getProperty(PropertyName.KEY_VAULT_CLIENT_SECRET));
+            properties.getProperty(PropertyName.KEY_VAULT_CLIENT_SECRET),
+            properties.getProperty(PropertyName.KEY_VAULT_TENANT_ID));
+
 
         return getAccessTokenByRefreshToken(
             tenantId,  
