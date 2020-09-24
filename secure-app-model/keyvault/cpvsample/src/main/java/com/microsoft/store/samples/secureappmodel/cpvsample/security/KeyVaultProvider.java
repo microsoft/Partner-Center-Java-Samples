@@ -32,9 +32,9 @@ public class KeyVaultProvider implements IVaultProvider
      * @param clientSecret The secure secret of the client requesting the token.
      * @param tenantId The tenant Id of the client requesting the token. 
      */
-    public KeyVaultProvider(String vaultBaseUrl, String clientId, String clientSecret, String tenantId)
+    public KeyVaultProvider(String vaultBaseUrl)
     {
-        client = getKeyVaultClient(clientId, clientSecret, tenantId);
+        client = getKeyVaultClient();
         this.vaultBaseUrl = vaultBaseUrl;
     }
 
@@ -69,7 +69,7 @@ public class KeyVaultProvider implements IVaultProvider
      * 
      * @return A client that is capable of interacting with the Azure Key Vault service.
      */
-    private SecretClient getKeyVaultClient(String clientId, String clientSecret, String tenantId)
+    private SecretClient getKeyVaultClient()
     {
         DefaultAzureCredential defaultAzureCredential = new DefaultAzureCredentialBuilder().build();
         
