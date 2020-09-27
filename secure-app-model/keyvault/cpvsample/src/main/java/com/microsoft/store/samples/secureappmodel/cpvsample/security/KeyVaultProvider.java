@@ -3,7 +3,6 @@
 
 package com.microsoft.store.samples.secureappmodel.cpvsample.security;
 
-import com.azure.identity.DefaultAzureCredential;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
@@ -15,12 +14,12 @@ import com.azure.security.keyvault.secrets.SecretClientBuilder;
 public class KeyVaultProvider implements IVaultProvider
 {
     /**
-     * The client used to interact with the Azure Key Vault service.
+     * The client used to manage Secrets in the Azure KeyVault by interacting with the Azure Key Vault service.
      */
     private SecretClient client;
 
     /**
-     * The vault name, e.g. https://myvault.vault.azure.net
+     * The Vault URL, e.g. https://myvault.vault.azure.net
      */
     private String vaultBaseUrl; 
 
@@ -36,7 +35,7 @@ public class KeyVaultProvider implements IVaultProvider
     }
 
     /**
-     * Gets the specified value from the vault.
+     * Gets the value of the specified secret from the Azure Key Vault..
      * 
      * @param secretName Identifier of the value to be retrieved.
      * @return The value for the specified secret.
@@ -47,7 +46,8 @@ public class KeyVaultProvider implements IVaultProvider
     }
 
     /**
-     * Stores the specified value in the vault.
+     * Adds a secret with the specified {@code secretName} and {@code value} to the key vault if it does not exist. 
+     * If the named secret exists, a new version of the secret is created.
      * 
      * @param secretName Identifier of the value to be stored.
      * @param value The value to be stored.
@@ -58,17 +58,15 @@ public class KeyVaultProvider implements IVaultProvider
     }
 
     /**
-     * Gets a client that is capable of interacting with the Azure Key Vault service.
+     * Gets the Secret Client, capable of managing Secrets in the Azure Key Vault by interacting with Azure Key Vault service.
      * 
-     * @return A client that is capable of interacting with the Azure Key Vault service.
+     * @return The Secret Client, capable of managing Secrets in the Azure Key Vault by interacting with Azure Key Vault service.
      */
     private SecretClient getKeyVaultClient()
     {
-        DefaultAzureCredential defaultAzureCredential = new DefaultAzureCredentialBuilder().build();
-        
         client = new SecretClientBuilder()
             .vaultUrl(vaultBaseUrl)
-            .credential(defaultAzureCredential)
+            .credential(new DefaultAzureCredentialBuilder().build())
             .buildClient();
 
         return client;
