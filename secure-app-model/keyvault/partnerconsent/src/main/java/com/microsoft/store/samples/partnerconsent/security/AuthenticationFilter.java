@@ -233,9 +233,7 @@ public class AuthenticationFilter implements Filter
         redirectUrl = getConfigValue(config, "redirect_url");
 
         vault = new KeyVaultProvider(
-            getConfigValue(config, "keyvault_base_url"),
-            getConfigValue(config, "keyvault_client_id"),
-            getConfigValue(config, "keyvault_client_secret"));
+            getConfigValue(config, "keyvault_base_url"));
     }
 
     /**

@@ -3,18 +3,10 @@
 
 package com.microsoft.store.samples.partnerconsent.security;
 
-import java.net.MalformedURLException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.azure.security.keyvault.secrets.SecretClient;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
 
-import com.microsoft.aad.adal4j.AuthenticationContext;
-import com.microsoft.aad.adal4j.AuthenticationResult;
-import com.microsoft.aad.adal4j.ClientCredential;
-import com.microsoft.azure.keyvault.KeyVaultClient;
-import com.microsoft.azure.keyvault.KeyVaultClientCustom;
-import com.microsoft.azure.keyvault.authentication.KeyVaultCredentials;
 
 /**
  * Provides a secure mechanism for retrieving and store sensitive information using Azure Key Vault.
@@ -22,12 +14,12 @@ import com.microsoft.azure.keyvault.authentication.KeyVaultCredentials;
 public class KeyVaultProvider implements IVaultProvider
 {
     /**
-     * The client used to interact with the Azure Key Vault service.
+     * The client used to manage Secrets in the Azure KeyVault by interacting with the Azure Key Vault service.
      */
-    private KeyVaultClientCustom client;
+    private SecretClient client;
 
     /**
-     * The vault name, e.g. https://myvault.vault.azure.net
+     * The Vault URL, e.g. https://myvault.vault.azure.net
      */
     private String vaultBaseUrl; 
 
@@ -35,117 +27,49 @@ public class KeyVaultProvider implements IVaultProvider
      * Initializes a new instance of the {@link KeyVaultProvider} class.
      * 
      * @param vaultBaseUrl The vault name, e.g. https://myvault.vault.azure.net
-     * @param clientId The identifier of the client requesting the token.
-     * @param clientSecret The secure secret of the client requesting the token.
      */
-    public KeyVaultProvider(String vaultBaseUrl, String clientId, String clientSecret)
+    public KeyVaultProvider(String vaultBaseUrl)
     {
-        client = getKeyVaultClient(clientId, clientSecret);
+        client = getKeyVaultClient();
         this.vaultBaseUrl = vaultBaseUrl;
     }
 
     /**
-     * Gets the specified value from the vault.
+     * Gets the value of the specified secret from the Azure Key Vault..
      * 
      * @param secretName Identifier of the value to be retrieved.
      * @return The value for the specified secret.
      */
     public String getSecret(String secretName)
     {
-        return client.getSecret(vaultBaseUrl, secretName).value();
+        return client.getSecret(secretName).getValue();
     }
 
     /**
-     * Stores the specified value in the vault.
+     * Adds a secret with the specified {@code secretName} and {@code value} to the key vault if it does not exist. 
+     * If the named secret exists, a new version of the secret is created.
      * 
      * @param secretName Identifier of the value to be stored.
      * @param value The value to be stored.
      */
     public void setSecret(String secretName, String value)
     {
-        client.setSecret(vaultBaseUrl, secretName, value);
+        client.setSecret(secretName, value);
     }
 
     /**
-     * Gets an access token from the authority.
+     * Gets the Secret Client, capable of managing Secrets in the Azure Key Vault by interacting with Azure Key Vault service.
      * 
-     * @param authorization Address of the authority to issue the token.
-     * @param resource Identifier of the target resource that is the recipient of the requested token.
-     * @param clientId The identifier of the client requesting the token.
-     * @param clientSecret The secure secret of the client requesting the token.
-     * @return An instance of {@link AuthenticationResult} that contains an access token and refresh token.
-     * 
-     * @throws ExecutionException {@link ExecutionException}
-     * @throws InterruptedException {@link InterruptedException}
-     * @throws MalformedURLException {@link MalformedURLException}
+     * @return The Secret Client, capable of managing Secrets in the Azure Key Vault by interacting with Azure Key Vault service.
      */
-    private AuthenticationResult getAccessToken(String authorization, String resource, String clientId, String clientSecret) 
-        throws ExecutionException, InterruptedException, MalformedURLException
+    private SecretClient getKeyVaultClient()
     {
-        AuthenticationContext authContext; 
-        AuthenticationResult authResult;
-        ExecutorService service = null;
-        Future<AuthenticationResult> future;
+        client = new SecretClientBuilder()
+            .vaultUrl(vaultBaseUrl)
+            .credential(new DefaultAzureCredentialBuilder().build())
+            .buildClient();
 
-        try
-        {
-            service = Executors.newFixedThreadPool(1);
-            authContext = new AuthenticationContext(authorization, true, service);
-
-            future = authContext.acquireToken(
-                resource,
-                new ClientCredential(
-                    clientId, 
-                    clientSecret), 
-                null);
-            
-            authResult = future.get();
-
-            return authResult;
-        }
-        finally
-        {
-            service.shutdown();
-        }
-    }
-
-    /**
-     * Gets a client that is capable of interacting with the Azure Key Vault service.
-     *
-     * @param clientId The identifier of the client requesting the token.
-     * @param clientSecret The secure secret of the client requesting the token. 
-     * 
-     * @return A client that is capable of interacting with the Azure Key Vault service.
-     */
-    private KeyVaultClientCustom getKeyVaultClient(String clientId, String clientSecret)
-    {
-        return new KeyVaultClient(new KeyVaultCredentials() 
-        {
-            /**
-             * @param authorization Address of the authority to issue the token.
-             * @param resource Identifier of the target resource that is the recipient of the requested token, a URL.
-             * @param scope The scope of the authentication request.
-             *
-             * @return Access token to be used with Azure Key Vault operations.
-             */
-            @Override
-             public String doAuthenticate(String authorization, String resource, String scope) 
-             {
-                 AuthenticationResult authResult; 
-                 
-                 try 
-                 {
-                     authResult = getAccessToken(authorization, resource, clientId, clientSecret);
- 
-                     return authResult.getAccessToken();
-                 }
-                 catch(Exception ex)
-                 {
-                     ex.printStackTrace();
-                 }
- 
-                 return "";
-             }
-        });
+        return client;
+        
     }
 }

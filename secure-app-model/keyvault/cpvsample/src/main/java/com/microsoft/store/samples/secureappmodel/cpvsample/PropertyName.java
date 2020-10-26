@@ -29,6 +29,11 @@ public class PropertyName
     public static final String KEY_VAULT_CLIENT_ID = "keyvault.clientId";
 
     /**
+     * The name of the tenant Id property.
+     */
+    public static final String KEY_VAULT_TENANT_ID = "keyvault.tenantId";
+
+    /**
      * The name of the client secret property.
      */
     public static final String KEY_VAULT_CLIENT_SECRET = "keyvault.clientSecret";

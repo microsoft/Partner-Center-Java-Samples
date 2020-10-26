@@ -159,9 +159,7 @@ public class AccessTokenProvider implements IAccessTokenProvider
         throws ExecutionException, InterruptedException, MalformedURLException
     {
         IVaultProvider vault = new KeyVaultProvider(
-            properties.getProperty(PropertyName.KEY_VAULT_BASE_URL),
-            properties.getProperty(PropertyName.KEY_VAULT_CLIENT_ID), 
-            properties.getProperty(PropertyName.KEY_VAULT_CLIENT_SECRET));
+            properties.getProperty(PropertyName.KEY_VAULT_BASE_URL));
 
         return getAccessTokenByRefreshToken(
             tenantId,  
